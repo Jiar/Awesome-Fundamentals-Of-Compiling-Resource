@@ -1,0 +1,458 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Errata: Modern Compiler Implementation in Java
+Date: Sat, 9 Apr 2011 22:15:43 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CBF703.AAB8EE40"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5994
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CBF703.AAB8EE40
+Content-Type: text/html;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.cs.princeton.edu/~appel/modern/basic/java/errata.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Errata: Modern Compiler Implementation in =
+Java</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; charset=3Dgb2312">
+<META content=3D"MSHTML 6.00.2900.6058" name=3DGENERATOR></HEAD>
+<BODY bgColor=3D#ffffff>
+<H2><FONT color=3D#d00000>Modern Compiler Implementation in Java: =
+<SMALL>Basic=20
+Techniques</SMALL></FONT></H2>&copy;1997 by <A=20
+href=3D"http://www.cs.princeton.edu/~appel"><STRONG>Andrew W.=20
+Appel</STRONG></A><BR>
+<H2>Errors in 1997 edition</H2><STRONG>All of these errors are fixed in =
+the <A=20
+href=3D"http://www.cs.princeton.edu/~appel/modern/java">1998 =
+edition</A>.</STRONG>=20
+Please do not continue to report errors in the 1997 (preliminary) =
+edition.=20
+<P><STRONG>Page 13.</STRONG> Line 13, there should be no underscores in =
+the=20
+declaration of <TT>interpStm</TT>.=20
+<P><STRONG>Page 14.</STRONG> Class <TT>Tree</TT> is declared =
+incorrectly:=20
+<TT>right</TT> is missing its <TT>Tree</TT> class declarator. The=20
+<TT>insert</TT> method is not inside any class; it may reasonably be put =
+inside=20
+the <TT>Tree</TT> class. Finally, <TT>insert</TT> must use the=20
+<TT>compareTo</TT> method instead of <TT>key&lt;t.key</TT> to compare =
+strings.=20
+<P><STRONG>Page 22.</STRONG> Second-to-last paragraph and last paragraph =
+should=20
+refer to six automata in the figure, not four.<BR>Figure 2.4, the edge =
+from=20
+state 2 to state 4 should be labeled <TT>a-e,g-z,0-9</TT>; state 5 =
+should be a=20
+final state recognizing <TT>error</TT>.=20
+<P><STRONG>Page 27.</STRONG> Figure 2.6, the automaton for <I>M*</I> =
+should be=20
+<IMG src=3D"http://www.cs.princeton.edu/~appel/modern/text/nfadefas.gif" =
+
+align=3Dtop>=20
+<P><STRONG>Page 29.</STRONG> The last statement of the algorithm =
+(<I>j</I> &lt;-=20
+<I>j</I>+1) should not be indented so far; it should be at the same =
+level as the=20
+<B>foreach</B>.=20
+<P><STRONG>Page 31.</STRONG> Last line should refer to <TT>sym.IF</TT> =
+and=20
+<TT>sym.ID</TT>, not <TT>Syms.IF</TT> and <TT>Syms.ID</TT>.=20
+<P><STRONG>Page 32.</STRONG> In Program 2.9:=20
+<UL>
+  <LI>After the first <TT>%%</TT> mark, insert <TT>%{</TT>=20
+  <LI>Replace the second <TT>%%</TT> by <TT>%}</TT>=20
+  <LI><TT>eofval</TT> function should refer to <TT>sym.EOF</TT>, not=20
+  <TT>Syms.EOF</TT>=20
+  <LI>Action for <TT>{digits}</TT> should be<BR><TT>{return tok(sym.NUM, =
+new=20
+  Integer(yytext()));}</TT>=20
+  <LI>Action for floating-point literals should be<BR><TT>{return =
+tok(sym.REAL,=20
+  new Double(yytext()));}</TT> </LI></UL>
+<P><STRONG>Page 32.</STRONG> The constructor for class <TT>Symbol</TT> =
+should=20
+read, <PRE>  Symbol(int s, int l, int r, Object v) {
+    sym=3Ds; left=3Dl; right=3Dr; value=3Dv;
+  }
+</PRE>but in the text the type of <TT>v</TT> was given incorrectly as=20
+<TT>int</TT>.=20
+<P><STRONG>Page 34.</STRONG> The JavaLex directive to declare =
+<TT>COMMENT</TT>=20
+as a start-state should be: <PRE>%state COMMENT
+</PRE>and the command to re-enter the initial state should be: =
+<PRE>&lt;COMMENT&gt;"*)"       {yybegin(YYINITIAL);}
+</PRE>
+<P><STRONG>Page 35.</STRONG> Reference to <TT>Toy.lex</TT> should be=20
+<TT>Tiger.lex</TT>.=20
+<P><STRONG>Page 50.</STRONG> The last <STRONG>if</STRONG> statement =
+should be=20
+indented to the same position as the others.=20
+<P><STRONG>Page 54.</STRONG> Grammar 3.14, both occurrences of <I>F'</I> =
+should=20
+be <I>T'</I>.=20
+<P><STRONG>Page 55.</STRONG> Table 3.16: Entries in rows <I>E</I> and =
+<I>T</I>=20
+should not have $ symbol; entry for row <I>F</I>, column =
+<STRONG>(</STRONG>=20
+should be <I>F-&gt;(E)</I>.=20
+<P><STRONG>Page 55.</STRONG> First line of text should refer to "same=20
+nonterminal <I>S</I>", not "same nonterminal <I>X</I>".<BR>First full =
+paragraph=20
+should read, "In such a case, we can <I>left factor</I> the grammar -- =
+that is,=20
+take the allowable endings and make a new nonterminal <I>X</I> to stand =
+for=20
+them."=20
+<P><STRONG>Page 58.</STRONG> On the 5th line of the figure, <I>E</I> =
+should have=20
+the subscript 11. On the 7th line from the bottom of the figure, the =
+second=20
+occurrence of <TT>id</TT> should have subscript 20, not 4.=20
+<P><STRONG>Page 61.</STRONG> In the state 3 box, the first line should =
+read=20
+<STRONG>S-&gt;(.L)</STRONG>, not <STRONG>L-&gt;(.L)</STRONG>=20
+<P><STRONG>Page 63.</STRONG> <STRONG>Figure 3.20</STRONG> should have an =
+arrow=20
+from state 3 to state 2, labeled by <STRONG>x</STRONG>. =
+<BR><STRONG>Grammar=20
+3.22</STRONG>,=20
+<UL>
+  <LI>rule 1 should read <I>E-&gt;T+E</I>=20
+  <LI>rule 2 should read <I>E-&gt;T</I>.</LI></UL>
+<P><STRONG>Page 64.</STRONG> Figure 3.23, third item in state 1 should =
+read=20
+<I>E-&gt;.T</I> and the edge from state 3 to state 4 should be labeled =
+with +=20
+instead of comma.=20
+<P><STRONG>Page 66.</STRONG> Figure 3.25,=20
+<DL>
+  <DT>State 1:
+  <DD>Fourth and fifth items should read <I>T -&gt; .x</I> instead of =
+<I>E -&gt;=20
+  .x</I>=20
+  <DT>State 4:
+  <DD>There should be fifth item, <I>T -&gt; .x</I> with lookahead +, =
+and the=20
+  edge labelled <I>x</I> should go to state 5, not 7.=20
+  <DT>State 7:
+  <DD>There should be no state 7.=20
+  <DT>Table row 4:
+  <DD>should have <I>s5</I> instead of <I>s7</I>.=20
+  <DT>Table row 7:
+  <DD>should be deleted. </DD></DL>
+<P><STRONG>Page 66.</STRONG> Paragraph beginning "Merging states 5 and =
+7" should=20
+be deleted. For Grammar 3.22 the LR(1) table, the LALR(1) table, and the =
+SLR=20
+table are all the same.=20
+<P><STRONG>Page 67.</STRONG> Figure 3.26 incorrectly shows LL(1) as a =
+subset of=20
+SLR. In fact, LL(1) is not even a subset of LALR(1): there is an LL(1) =
+grammar=20
+that is not LALR(1).=20
+<P><STRONG>Page 68.</STRONG>"As explained on page 54, factoring the =
+grammar will=20
+eliminate the ambiguity." This is incorrect; factoring does not =
+eliminate the=20
+ambiguity, but a different grammar transformation does.=20
+<P><STRONG>Page 69.</STRONG> Grammar 3.27, production 4 should read=20
+<STRONG><I>S</I> --&gt; begin <I>L</I> end</STRONG>=20
+<P><STRONG>Page 74.</STRONG> 5th line from the bottom should read=20
+<STRONG><I>S</I> --&gt; id :=3D <I>E</I></STRONG>, not <I>S</I> --&gt; =
+id :=3D id.=20
+<P><STRONG>Page 78.</STRONG> Exercise 3.5, production 4's left-hand side =
+should=20
+be <I>E</I>, not <I>B</I>.=20
+<P><STRONG>Page 81.</STRONG> There should be no =3D sign after <TT>int =
+Tprime(int=20
+a)</TT>. In the <TT>F()</TT> function, the <TT>ID</TT> and <TT>NUM</TT> =
+cases=20
+should be, <PRE>         case ID:   int i=3Dlookup((String)(tok.val)); =
+advance(); return i;
+         case NUM:  int i=3D((Integer)(tok.val)).intValue();=20
+                    advance(); return i;
+</PRE>
+<P><STRONG>Page 86.</STRONG> <STRONG>Program 4.5</STRONG> should =
+<TT>intern</TT>=20
+strings before putting them in the table, and before looking them up: =
+<PRE>   class Update extends Table {
+       private Table base; String id; int val;
+       Update(Table b, String i, int v) {base=3Db; id=3Di.intern(); =
+val=3Dv;}
+       int lookup(String i) {
+          if (i.intern()=3D=3Did) return val;
+          else return base.lookup(i);
+       }
+   }
+</PRE><STRONG>Program 4.6</STRONG> should use <B>-</B>,<B>*</B>,<B>/</B> =
+in the=20
+<TT>eval</TT> methods of <TT>Minus</TT>, <TT>Times</TT>, and =
+<TT>Div</TT>=20
+instead of using <B>+</B> everywhere.=20
+<P><STRONG>Page 87.</STRONG>=20
+<P><STRONG>Page 88.</STRONG> The rule <TT>exps ::=3D exps COMMA exp</TT> =
+should=20
+have the following semantic action: <PRE>exp ::=3D exps COMMA exp:e      =
+         {: System.out.print(e); :}
+</PRE>The second-to-last action should read <PRE>exp ::=3D stm:s COMMA =
+exp:e              {:RETURN=3De;:}
+</PRE>
+<P><STRONG>Page 98.</STRONG> In exercise 4.3, "<I>cdots</I>" should be =
+"<SUP>. .=20
+.</SUP>".=20
+<P><STRONG>Page 101.</STRONG> The 7th line from the bottom should read,=20
+"<I>D</I> is compiled using <IMG=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/sigma.gif"><SUB><SM=
+ALL>0</SMALL></SUB>=20
++ <IMG=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/sigma.gif"><SUB><SM=
+ALL>2</SMALL></SUB>=20
++ <IMG=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/sigma.gif"><SUB><SM=
+ALL>4</SMALL></SUB>,=20
+and the result of the analysis is ..." (the subscripts are incorrect in =
+the=20
+book).=20
+<P><STRONG>Page 113.</STRONG> Code lines near top of page for calls to =
+checkInt=20
+should read: <PRE>checkInt(transExp(e.left), e.left.pos);
+checkInt(transExp(e.right), e.right.pos);
+</PRE>instead of: <PRE>checkInt(transExp(e.left, e.left.pos));
+checkInt(transExp(e.right, e.left.pos));
+</PRE>
+<P><STRONG>Page 115-116.</STRONG> The functions <TT>Exp =
+transDec(Absyn.TypeDec=20
+d)</TT> and <TT>Exp transDec(Absyn.FunctionDec d)</TT> should return=20
+<TT>null</TT> as a placeholder.=20
+<P><STRONG>Page 119.</STRONG> Exercise 5.2, The line beginning=20
+<I>s</I><SUB>4</SUB> should be, =
+<I>s</I><SUB>4</SUB>=3D<I>s</I><SUB>1</SUB> union=20
+<I>s</I><SUB>3</SUB>.=20
+<P><STRONG>Page 115.</STRONG> The second line of the first code fragment =
+should=20
+read, <PRE>   env.venv.put(d.name, new VarEntry(transExp(d.init).ty));
+</PRE>
+<P><STRONG>Page 116.</STRONG> The 8th line of the first code fragment =
+should=20
+read, <PRE>               new VarEntry(
+</PRE>
+<P><STRONG>Page 131.</STRONG> In class <TT>Frame</TT>, the <TT>name</TT> =
+and=20
+<TT>formals</TT> fields should not be prefixed by the <TT>abstract</TT>=20
+modifier.=20
+<P><STRONG>Page 133.</STRONG> Sentence after <TT>function m...</TT> =
+should start=20
+with "If <I>x</I> stays in parameter register 1 throughout <I>m</I>, =
+..."=20
+<P><STRONG>Page 135.</STRONG> In class <TT>FormalEscape</TT>, the body =
+of the=20
+<TT>setEscape()</TT> function should be <TT>{fl.escape=3Dtrue;}</TT> and =
+in class=20
+<TT>VarEscape</TT> the body of <TT>setEscape()</TT> should be=20
+<TT>{vd.escape=3Dtrue;}</TT>=20
+<P><STRONG>Page 140.</STRONG> The book recommends making a file called=20
+<TT>Sparc/Frame.java</TT> or <TT>Mips/Frame.java</TT>, etc. This =
+confuses JDK=20
+1.1 (though not JDK 1.0 or other Java compilers); a simple solution is =
+to create=20
+<TT>Sparc/SparcFrame.java</TT> or <TT>Mips/MipsFrame.java</TT> etc.=20
+<P><STRONG>Page 141.</STRONG> (Not a bug, but a clarification): Exercise =
+6.2. If=20
+the machine passes parameter 1 in <TT>r1</TT> and parameter 2 in =
+<TT>r2</TT>=20
+(for example), then clearly <I>x</I> arrives in <TT>r1</TT>. But it =
+cannot stay=20
+there during the call to <TT>h(y,y)</TT>; so where does the compiler =
+arrange to=20
+keep it?=20
+<P><STRONG>Page 146.</STRONG> Figure 7.2, last two lines, each =
+occurrence of=20
+<TT>RELOP</TT> should be <TT>CJUMP</TT>. (Thanks to Daehak Kim for =
+reporting=20
+this.)=20
+<P><STRONG>Page 147.</STRONG> Line 16 should read,=20
+"MOVE(MEM(<I>e</I><SUB>1</SUB>),<I>e</I><SUB>2</SUB>) Evaluate=20
+<I>e</I><SUB>1</SUB>, yielding address <I>a</I>. Then evaluate=20
+<I>e</I><SUB>2</SUB>, and store the result into <I>wordSize</I> bytes of =
+memory=20
+starting at <I>a</I>."=20
+<P><STRONG>Page 164.</STRONG> Third paragraph: <TT>transDec</TT> does =
+not return=20
+a result record containing new environments, it just returns a=20
+<TT>Translate.Exp</TT>.=20
+<P><STRONG>Page 179.</STRONG> The last sentence of the page should =
+begin, "But=20
+8.3c shows a better trace covering..."=20
+<P><STRONG>Page 188.</STRONG> In the table, the second tile shown =
+matching the=20
+MEM node does not correspond to any instruction of the Jouette machine, =
+and=20
+should not be listed.=20
+<P><STRONG>Page 194.</STRONG> In the "<B>Two-address instructions</B>"=20
+paragraph, the instructions should read, <PRE>mov t1,t2       t1 &lt;- =
+t2
+add t1,t3       t1 &lt;- t1 + t3
+</PRE>
+<P><STRONG>Page 197.</STRONG> The third line of the second code fragment =
+should=20
+read, <PRE>             new TempList(frame.FP(),null));
+</PRE>
+<P><STRONG>Page 199-200.</STRONG> Calls to munchStm and munchExp are =
+missing=20
+parentheses around the argument parameter, and all uses of the =
+<TT>^</TT>=20
+operator should be <TT>+</TT> instead.=20
+<P><STRONG>Page 211.</STRONG> In Table 10.5, 4th iteration, row 3, =
+change=20
+<B>c</B> to <B>b</B>.=20
+<P><STRONG>Page 230.</STRONG> In Figure 11.6, the graph-node =
+<STRONG>d</STRONG>=20
+should have the color 1, not 4.=20
+<P><STRONG>Page 230.</STRONG> (Not a bug, but a clarification): =
+Precolored nodes=20
+should be considered to have infinite degree. Therefore, =
+<I>simplify</I>,=20
+<I>freeze</I>, and <I>spill</I> cannot be performed on them. However, an =
+
+ordinary (non-precolored) node may be coalesced with a precolored node. =
+<A=20
+href=3D"http://www.cs.princeton.edu/~appel/modern/text/color1.html">Click=
+ here for=20
+a detailed example.</A>=20
+<P><STRONG>Page 233.</STRONG>First line should read, <I>Degree(T)&lt;K. =
+Since T=20
+will lose the neighbor X and gain the neighbor R, ...</I>=20
+<P><STRONG>Page 240.</STRONG> In procedure FreezeMoves, before the =
+second=20
+<B>if</B> statement, insert the statement <B>v:=3DGetAlias(v)</B>.=20
+<P><STRONG>Page 265.</STRONG> Figure 13.7b, arrows should come from =
+first and=20
+third elements of root set, not first and second elements.=20
+<P><STRONG>Page 296.</STRONG> 14th line from the bottom, delete "a =
+classless=20
+language".=20
+<P><STRONG>Page 301.</STRONG> Third line from bottom should say, "Thus,=20
+<TT>addTen</TT> is a function=20
+<TT>g</TT>(<I>x</I>)=3D<TT>addFive</TT>(<TT>addFive</TT>(<I>x</I>))".=20
+<P><STRONG>Page 320.</STRONG> In the program fragment on the right, the =
+third=20
+line from the bottom should read, <PRE> in if y&gt;8 then loop(y)
+</PRE>Second line from the bottom of the page should read:<BR>program on =
+the=20
+right will return 0, but the program on the left will first get=20
+<P><STRONG>Page 324.</STRONG> Last line should refer to <TT>h(i)</TT>, =
+not=20
+<TT>i</TT>.=20
+<P><STRONG>Page 339.</STRONG> On the 8th line from the bottom, delete =
+first two=20
+words.=20
+<P><STRONG>Page 340.</STRONG> In Table 16.4, the last two rows should =
+read,<BR>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD><I>f(a<SUB>1</SUB>,...,a<SUB>n</SUB>)</I></TD>
+    <TD align=3Dmiddle width=3D30>{}</TD>
+    <TD><I>All expressions of the form M</I>[<I>x</I>]</TD></TR>
+  <TR>
+    <TD><I>t :=3D f(a<SUB>1</SUB>,...,a<SUB>n</SUB>)</I></TD>
+    <TD align=3Dmiddle width=3D30>{}</TD>
+    <TD>expressions containing <I>t</I> + <I>all expressions of the form =
+
+      M</I>[<I>x</I>]</TD></TR></TBODY></TABLE>Also, the paragraph =
+beginning "Given=20
+<I>gen</I> and <I>kill</I>" says the word "successors" when it should =
+say=20
+"predecessors".=20
+<P><STRONG>Page 341.</STRONG> In the table, in the column headed=20
+<I>gen</I>[<I>s</I>], delete each of the three instances of=20
+"-<I>kill</I>[<I>s</I>]".=20
+<P><STRONG>Page 345.</STRONG> Algorithm 16.5 should read, =
+<PRE>Topological-sort:
+    N :=3D number of nodes
+    for all nodes i
+        mark[i] :=3D false
+    DFS(start-node)
+
+function DFS(i)
+   if mark[i]=3Dfalse
+        mark[i] :=3D true
+        for each successor s of node i
+              DFS(s)
+        sorted[N] :=3D i
+        N :=3D N-1
+</PRE>
+<P><STRONG>Page 346.</STRONG> Algorithm 16.6, the first line should =
+read,=20
+<BR><I>W</I> :=3D the set of all nodes=20
+<P><STRONG>Page 355.</STRONG> The one-line table under "USING MAY-ALIAS=20
+INFORMATION" should read,=20
+<TABLE>
+  <TBODY>
+  <TR>
+    <TH>Statement <I>s</I> </TH>
+    <TH><I>gen</I>[<I>s</I>]</TH>
+    <TH><I>kill</I>[<I>s</I>]</TH></TR>
+  <TR>
+    <TD><I>M</I>[<I>a</I>] :=3D <I>b</I></TD>
+    <TD width=3D30>{}</TD>
+    <TD>{M</I>[<I>x</I>] | <I>a</I> may-alias <I>x</I> at=20
+  <I>s</I>}</TD></TR></TBODY></TABLE>The example beginning "Now we can =
+analyze the=20
+following program fragment", though technically correct, does not =
+properly=20
+illustrate the use of may-alias information. <A=20
+href=3D"http://www.cs.princeton.edu/~appel/modern/text/mayalias.html">Her=
+e's a=20
+better example.</A>=20
+<P><STRONG>Page 362.</STRONG> The set equation for <I>D</I>[<I>n</I>] =
+applies to=20
+all nodes except the start node <I>s</I><SUB>0</SUB>; the equation for =
+the start=20
+node is <I>D</I>[<I>s</I><SUB>0</SUB>]=3D{<I>s</I><SUB>0</SUB>}.=20
+<P><STRONG>Page 365.</STRONG> Lines 5-7, definition of <STRONG>Nested=20
+loops</STRONG> should be: If <I>A</I> and <I>B</I> are loops with =
+headers=20
+<I>a</I> and <I>b</I> respectively, such that <I>a</I> not-equal =
+<I>b</I> and=20
+<I>b</I> is in <I>A</I>, then the nodes of <I>B</I> are a proper subset =
+of the=20
+nodes of <I>A</I>.=20
+<P><STRONG>Page 367.</STRONG> In the paragraph headed by=20
+<STRONG>HOISTING</STRONG>, 5th line, replace "<I>a</I>&lt;<I>b</I>" by=20
+"<I>i</I>&gt;=3D<I>N</I> initially."=20
+<H3>Acknowledgments</H3>Thanks to Jeffrey Hsu, Max Hailperin, Torben =
+Mogensen,=20
+Mikael Petterson, Luca Cristoforetti, Doug Morgan, and others for =
+reporting=20
+these errors. </I></BODY></HTML>
+
+------=_NextPart_000_0000_01CBF703.AAB8EE40
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/nfadefas.gif
+
+R0lGODdhpgBHAPAAAAAAAP///ywAAAAApgBHAAAC/oyPqcvtD6OctNqLs968+w+G4kiW5omm6sq2
+7gvH8kzX9o3n+s73/gYICofEovAnO36KHCYyFewQUconCaAZwrRWEFdSrUW7Uko4dyZb0gg2b6z2
+wkVfeVyKPeUD+9D8PuHml9A3+Ae4cFhSaKCIx4h44HgF2UhXF8lX6WG0KTlZYZSpqQd2CBoq+IRa
+9lB15nkR1enD2tow2RcrW7n7Ynuboevl6qsCHMzgu2ccYdxsAt0E0czMCTaDnJwYajkdGCP97drN
+Z6ZsJt6kTqja+FwOXSfOLgwE5/R5vi/NRN+liNmUd4msxeuE0N+aVZuWFfrTz1ugOf9+xHLYjlC8
+w3QKKvZYRs2cpYcblbGKWAsbOWuMqkkyCS7mR5UO8mCx2VFmr3LOUspEZw5nzpAvCwKD55MmUJFM
+NdZss5MnLiTyao6x6SggSVzastZjgXKJqKF+ZrnDERZsqTtpoSzK5FHPV3Kj4so5m2WUxHS0eEGZ
+i+buRCraAAJu56lwKsVxGBe7OfAuXr1QHU8ti4mysMhJMmsekfAwYs6faYQ+Pba06tWsW7t+DTu2
+7Nm0a9u+jTu37t28e/v+DTy48OHEi88uAAA7
+
+------=_NextPart_000_0000_01CBF703.AAB8EE40
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/sigma.gif
+
+R0lGODlhBwAHAPAAAP///wAAACH5BAEAAAAALAAAAAAHAAcAAAINRI4HtrHNnnPSUGVxAQA7
+
+------=_NextPart_000_0000_01CBF703.AAB8EE40--

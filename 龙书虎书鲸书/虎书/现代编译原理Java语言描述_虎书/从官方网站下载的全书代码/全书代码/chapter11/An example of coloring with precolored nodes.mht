@@ -1,0 +1,657 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: An example of coloring with precolored nodes
+Date: Sat, 9 Apr 2011 22:11:04 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CBF703.0484B680"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5994
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: text/html;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>An example of coloring with precolored nodes</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; charset=3Dgb2312">
+<META content=3D"MSHTML 6.00.2900.6058" name=3DGENERATOR></HEAD>
+<BODY bgColor=3D#ffffff>
+<H2>Graph coloring with precolored nodes</H2>&copy;1997 by <A=20
+href=3D"http://www.cs.princeton.edu/~appel">Andrew W. Appel</A><BR>
+<H3>Supplement to the books,</H3><A=20
+href=3D"http://www.cs.princeton.edu/~appel/modern/basic/ml"><IMG=20
+alt=3D"Modern Compiler Implementation in ML"=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/basic/ml/cover35.gif"></=
+A> <A=20
+href=3D"http://www.cs.princeton.edu/~appel/modern/basic/c"><IMG=20
+alt=3D"Modern Compiler Implementation in C"=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/basic/c/cover35.gif"></A=
+> <A=20
+href=3D"http://www.cs.princeton.edu/~appel/modern/basic/java"><IMG=20
+alt=3D"Modern Compiler Implementation in Java"=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/basic/java/cover35.gif">=
+</A>=20
+<P>This page explains register allocation using <A=20
+href=3D"http://www.cs.princeton.edu/~appel/papers/coalesce.ps">Iterated =
+Register=20
+Coalescing</A> in the presence of precolored nodes (temporary variables =
+already=20
+assigned to machine registers).=20
+<P>The instruction-selection phase of a compiler may generate =
+arbitrarily many=20
+temporary variables, which must then be assigned to a finite set of =
+machine=20
+registers.=20
+<P>But some of the variables produced by instruction selection must be =
+assigned=20
+to specific machine registers, because of standard parameter-passing=20
+conventions, or the use of special registers such as stack pointer or =
+frame=20
+pointer. These variables are <I>precolored</I> before register =
+allocation. For=20
+each machine register, there may be at most one node precolored with =
+that color.=20
+
+<P>Precolored nodes should be considered to have infinite degree. =
+Therefore,=20
+<I>simplify</I>, <I>freeze</I>, and <I>spill</I> cannot be performed on =
+them.=20
+However, an ordinary (non-precolored) node may be coalesced with a =
+precolored=20
+node.=20
+<H4>Example</H4>Consider the following program, produced by the=20
+instruction-selection phase of a compiler: <PRE>enter:
+  c :=3D r3
+  a :=3D r1
+  b :=3D r2
+  d :=3D 0
+  e :=3D a
+loop:
+  d :=3D d+b
+  e :=3D e-1
+  if e&gt;0 goto loop
+  r1 :=3D d
+  r3 :=3D c
+  return
+    [ r1,r3 live out]
+</PRE>The target machine has three registers, <B>r1</B>, <B>r2</B>, =
+<B>r3</B>.=20
+Registers <B>r1</B> and <B>r2</B> are caller-save, and <B>r3</B> is =
+callee-save.=20
+The code generator has therefore made arrangements to preserve the value =
+of=20
+<B>r3</B> explicitly, by copying it into the temporary <B>c</B> and back =
+again.=20
+The interference graph for this function is:=20
+<P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1a.gif">
+<P>The register allocation proceeds as follows (with <I>K</I>=3D3):=20
+<OL>
+  <LI>In this graph, there is no opportunity for <B>simplify</B> or=20
+  <B>freeze</B> (because all the non-precolored nodes have degree =
+greater than=20
+  <I>K</I>). Any attempt to <B>coalesce</B> will produce a coalesced =
+node=20
+  adjacent to <I>K</I> or more high-degree nodes. Therefore we must =
+<B>spill</B>=20
+  some node. We calculate spill priorities as follows:=20
+  <TABLE>
+    <TBODY>
+    <TR>
+      <TD>Node</TD>
+      <TD></TD>
+      <TD>
+        <TABLE>
+          <TBODY>
+          <TR>
+            <TD>uses+defs</TD></TR>
+          <TR>
+            <TD>outside loop</TD></TR></TBODY></TABLE></TD>
+      <TD></TD>
+      <TD>
+        <TABLE>
+          <TBODY>
+          <TR>
+            <TD>uses+defs</TD></TR>
+          <TR>
+            <TD>within loop</TD></TR></TBODY></TABLE></TD>
+      <TD></TD>
+      <TD>degree</TD>
+      <TD></TD>
+      <TD>
+        <TABLE>
+          <TBODY>
+          <TR>
+            <TD>spill</TD></TR>
+          <TR>
+            <TD>priority</TD></TR></TBODY></TABLE></TD></TR>
+    <TR>
+      <TD><B>a:</B></TD>
+      <TD>(</TD>
+      <TD align=3Dmiddle>2</TD>
+      <TD>+10*</TD>
+      <TD align=3Dmiddle>0</TD>
+      <TD>) /</TD>
+      <TD align=3Dmiddle>4</TD>
+      <TD>=3D</TD>
+      <TD align=3Dmiddle>0.50</TD></TR>
+    <TR>
+      <TD><B>b:</B></TD>
+      <TD>(</TD>
+      <TD align=3Dmiddle>1</TD>
+      <TD>+10*</TD>
+      <TD align=3Dmiddle>1</TD>
+      <TD>) /</TD>
+      <TD align=3Dmiddle>4</TD>
+      <TD>=3D</TD>
+      <TD align=3Dmiddle>2.75</TD></TR>
+    <TR>
+      <TD><B>c:</B></TD>
+      <TD>(</TD>
+      <TD align=3Dmiddle>2</TD>
+      <TD>+10*</TD>
+      <TD align=3Dmiddle>0</TD>
+      <TD>) /</TD>
+      <TD align=3Dmiddle>6</TD>
+      <TD>=3D</TD>
+      <TD align=3Dmiddle>0.33</TD></TR>
+    <TR>
+      <TD><B>d:</B></TD>
+      <TD>(</TD>
+      <TD align=3Dmiddle>2</TD>
+      <TD>+10*</TD>
+      <TD align=3Dmiddle>2</TD>
+      <TD>) /</TD>
+      <TD align=3Dmiddle>4</TD>
+      <TD>=3D</TD>
+      <TD align=3Dmiddle>5.50</TD></TR>
+    <TR>
+      <TD><B>e:</B></TD>
+      <TD>(</TD>
+      <TD align=3Dmiddle>1</TD>
+      <TD>+10*</TD>
+      <TD align=3Dmiddle>3</TD>
+      <TD>) /</TD>
+      <TD align=3Dmiddle>3</TD>
+      <TD>=3D</TD>
+      <TD align=3Dmiddle>10.3</TD></TR></TBODY></TABLE>Node <B>c</B> has =
+the lowest=20
+  priority--it inteferes with many other temporaries but is rarely =
+used--so it=20
+  should be spilled first.=20
+  <P>Spilling <B>c</B>, we obtain the graph,=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1b.gif">
+  <P></P>
+  <LI>We can now coalesce <B>a</B> and <B>e</B>, since the resulting =
+node will=20
+  be adjacent to fewer than <I>K</I> high-degree nodes (after =
+coalescing, node=20
+  <B>d</B> will be low-degree, though it is high-degree right now). No =
+other=20
+  <B>simplify</B> or <B>coalesce</B> is possible now. Coalescing =
+<B>a+e</B>=20
+  gives,=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1c.gif">
+  <P></P>
+  <LI>Now we could coalesce <B>ae+r1</B> or coalesce <B>b+r2</B>. Let us =
+do the=20
+  latter:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1d.gif">
+  <P></P>
+  <LI>We can now coalesce either <B>ae+r1</B> or coalesce <B>d+r1</B>. =
+Let us do=20
+  the former:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1e.gif">
+  <P></P>
+  <LI>We cannot now coalesce <B>r1ae+d</B> because the move is=20
+  <I>constrained:</I> the nodes <B>r1ae</B> and <B>d</B> interfere. We =
+must=20
+  <B>simplify</B> <B>d</B>:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1f.gif">
+  <P></P>
+  <LI>Now we have reached a graph with only precolored nodes, so we pop =
+nodes=20
+  from the stack and assign colors to them. First we pick <B>d</B>, =
+which can be=20
+  assigned color <B>r3</B>. Nodes <B>a</B>, <B>b</B>, <B>e</B> have =
+already been=20
+  assigned colors by coalescing. But node <B>c</B>, which was a =
+<I>potential=20
+  spill</I>, turns into an <I>actual spill</I> when it is popped from =
+the stack,=20
+  since no color can be found for it.=20
+  <LI>Since there was spilling in this round, we must rewrite the =
+program to=20
+  include spill instructions. For each use (or definition) of <B>c</B>, =
+we make=20
+  up a new temporary, and fetch (or store) it immediately afterward (or=20
+  beforehand): <PRE>enter:
+  c1 :=3D r3
+  M[c_loc] :=3D c1
+  a :=3D r1
+  b :=3D r2
+  d :=3D 0
+  e :=3D a
+loop:
+  d :=3D d+b
+  e :=3D e-1
+  if e&gt;0 goto loop
+  r1 :=3D d
+  c2 :=3D M[c_loc]
+  r3 :=3D c2
+  return
+    [ r1,r3 live out]
+</PRE>
+  <LI>Now we build a new inteference graph:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1g.gif">
+  <P></P>
+  <LI>Graph coloring proceeds as follows. We can immediately coalesce=20
+  <B>c1+r3</B> and then <B>c2+r3</B>:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1h.gif">
+  <P></P>
+  <LI>Then, as before, we can coalesce <B>a+e</B> and then <B>b+r2</B>:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1i.gif">
+  <P></P>
+  <LI>As before, we can coalesce <B>ae+r1</B> and then simplify =
+<B>d</B>:=20
+  <P><IMG =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/color1j.gif">
+  <P></P>
+  <LI>Now we start popping from the stack: we select color <B>r3</B> for =
+
+  <B>d</B>, and this was the only node on the stack--all other nodes =
+were=20
+  coalesced or precolored. So the coloring is:=20
+  <TABLE>
+    <TBODY>
+    <TR>
+      <TD>Node</TD>
+      <TD>Color</TD></TR>
+    <TR>
+      <TD align=3Dmiddle>a</TD>
+      <TD align=3Dmiddle>r1</TD></TR>
+    <TR>
+      <TD align=3Dmiddle>b</TD>
+      <TD align=3Dmiddle>r2</TD></TR>
+    <TR>
+      <TD align=3Dmiddle>c</TD>
+      <TD align=3Dmiddle>r3</TD></TR>
+    <TR>
+      <TD align=3Dmiddle>d</TD>
+      <TD align=3Dmiddle>r3</TD></TR>
+    <TR>
+      <TD align=3Dmiddle>e</TD>
+      <TD align=3Dmiddle>r1</TD></TR></TBODY></TABLE>
+  <LI>Now we can rewrite the program with this register assignment: =
+<PRE>enter:
+  r3 :=3D r3
+  M[c_loc] :=3D r3
+  r1 :=3D r1
+  r2 :=3D r2
+  r3 :=3D 0
+  r1 :=3D r1
+loop:
+  r2 :=3D r3+r2
+  r1 :=3D r1-1
+  if r1&gt;0 goto loop
+  r1 :=3D r3
+  r3 :=3D M[c_loc]
+  r3 :=3D r3
+  return
+    [ r1,r3 live out]
+</PRE>
+  <LI>Finally, we can delete any move instruction whose source and =
+destination=20
+  are the same; these are the result of coalescing: <PRE>enter:
+  M[c_loc] :=3D r3
+  r3 :=3D 0
+loop:
+  r2 :=3D r3+r2
+  r1 :=3D r1-1
+  if r1&gt;0 goto loop
+  r1 :=3D r3
+  r3 :=3D M[c_loc]
+  return
+    [ r1,r3 live out]
+</PRE>The final program has only one uncoalesced move instruction.=20
+</LI></OL></BODY></HTML>
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/basic/ml/cover35.gif
+
+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
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/basic/c/cover35.gif
+
+R0lGODdhggCjAPIAAEZsGC1KH////32YXQAAAAAAAAAAAAAAACwAAAAAggCjAAAD/gi63L4DxBGh
+lPXpzbv/YOhRGIkppqiubOu+cCzPI3pN5Y1fdO/TGU3wRyyyMkPjSyBQAkk4SiWaKkFtRaZzSyQI
+vF8CmKAAM8kK5lcLUH/T6/dZjd4mQ3dH0Oym888Af01/ZH1Nhk1OE1VDQVI6DI8oU15kY4FhbJVt
+iZycfZxiWoBgXKYMm56YoombbJ5nYmKqC6+vQDYmi1aTPBa8Nw0kmwOamX2Whpigt7TNp06yZWjS
+gdXTstTZ0w2z3EpTJ73h5NDmPeEfeefs7e7e3u6REFdRvbn452zP8r8qjg+y1bEmTaClaga/adpG
+8FqRdHr8CesgaJkbVojkIFOl/qUiIXCTkMwTVo5ehTMDwKR8syoVqVGtYMKxqGaVzX4wXg5iWcll
+zEM/Oe40mMoOEke6GPEoSbOjIVFojAG9KBTOxaJ2gGnVFcwXFovwqPosA9PNTFV8kg3EybZWp7Yj
+d/2SFGnRjqRLpaSQtA7VWnlYV/CDe/OUw5H+TAz+uoPFrTy3Dm/ZRMjNSlBC6TRN+wllJbNPizED
+5dNsZ0AwKMdafUyWxpalxsimEyY2a1bbBLaepbp1KDMxVEcVEKGnlpUERF+2XIkCEwpjDCGH/kU0
+tqeesr3xWSho6u0sjeGGmp1npuFk1wwnb/O2+e5Qe+NGuziE8LPGMe9DNnbZ/unzZCXjB3akhaef
+d+hgQclxwfBlTxJH1dUXYTOUQuGFXFyxFD35YOhhRE7U140gf31ojogMZPTWDHs9mEM6UOhlhUhE
+OGXGX7JhZKI8Tm2ECoo/TAjCFAAJUYUKNsKxloXYGAEhSVTYpdcjMMaooWNDKdlNLDru2E6SoTig
+YpAATRkSOUSKY6aRHSpBVIYwPMmBkF7Waec5SckoZWMnQDSOjHcGaidT+DhIZIz35MDhouLkUw+d
+eAYp0YhEVWrppZgmJCgHRNWW6aegCkSEnxrqqSiVvOySUqfqfRZfdFDF8Vlt51U66pxddOrarp7q
+5lqtvWIKDaSTemVBqMjq/gqqUV2Z1GCqL55ZDl2bVmutD4ysmShXqmp17bfghssOtXdtKK1Jj57J
+aKNdIXqkuPA6+VVi2eqwZ59otgvMmkUWG28N/wYs8JyH6ksXt/g+G1GaiQpMrDobPGwtUgMP6y5f
+FWescV3mpsnVuqVufAS8AZRscgA49ZXBySyfDIDL5rQsM8pkzrVXnyjPPPMALtM4Lw06B81O0C2/
+rHPMRCddMghHc6D00zBzAfXUDTz9wNREG130Flh3jbUCXrOstdJOhG322WhnXUTabLdNdtM/uC33
+3C4LHTfdeOe9dQ969923D34HnjfQghcu9wyGJ962DIo3jnYMjh8+98tG/kMe+eVZ50zzC5h3XnTd
+m7fg+ehgywzD6F8nfjrqmZs+Nt6cs9516Yu7LrrsQrdMQeqz34471V+/Trbvv88sfOHEB3682EvD
+brboyxd/NuVH272C9M6XTnvzcItgOuvRzx519WJfL70EfwfA8/Yn87y0+VaDrvfLEaC9u8noV665
+2t6Tj7n+bmPf8FSQu+aFL33ce5zXWJC0A/ptATTb39scWLfXJS9tFPxcATOIP81tL3q0i13YhMdB
+BEKQeyUUYfBIuLzwlZB5MJPg+0IIwtU9DoB0qyHYLGjAE1JvbzacXs52KL4FOqCDoWNADCsYxOfx
+UIawu9oQNQDDGVou/oc//NsV8Yc42R3QgojbIeG82DorMg5w2Bugh3j3v6iZiG0vFKIZLyRDAULx
+gQ18IxSfKME4Hk6PJFxg7dSIoQTOEIlVBN7idoTIIcqxg37s3hr9Z7zO2WmEXIykEwV1PiaKK3SV
+HBwLK9Y4MA4scjQ8JQa/WMmMpU57SoQaEV1JNadtMmC17MAt/yVLpr2tfLzspS97F0xCemCX4bIa
+/LYmyWQac5gr/OQzoam2OX5rmtSkZBKvpUwXGNGZefTmN68ZThU20JqbwiYBv9fMdJaziYbUGuXA
+pc51FtCN1rKeYDZQxkyyZZvHfCZQ2kBQmaShDScTgMwUGgCGemAqslY5KEFjJ8YPlK9poDloIg6R
+Ii2UjAkL/ehHV2QVjhZUozVRYUV1KcuNTpSjo0hRRxmKRJCOdJsuTalOu3hCgB5RfsZjnAa7KdGi
+8i2CU2TpL4W6yokadYwe9GnV7mg7eJ4TdDFLpS2rKVUGrhCYSkiiP5UaVHRa9Z5mPSpYLbo3SN7t
+qn3kGj77x8W1qjV+Y71kXo0A172KTJxBHdtf0YjDuA72rVU9rGIXy9jGOtYFCQAAOw==
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/basic/java/cover35.gif
+
+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
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1a.gif
+
+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
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1b.gif
+
+R0lGODdhxQCAAPAAAP///wAAACwAAAAAxQCAAAAC/oSPqcvtD6OctNqLs968+w+G4kiW5omm6sq2
+7gvH8kzX9o1vwZ73/rgL/oZETODAKyqXCJ4QeWRKlc7oc4r9JZvbrNfWhX7Hta2ZjI6Zq+k2KxgF
+wN30uv2Oz+v3/L7/D3gTFkgYsVaI2LAWl9gox3jliBg2KAk4WGnZV5mpqcfZ6XmXGSn6yZhQajqK
+mhq6ivaqCtv2+thKG4urYJs71fvo6wYcLKw7MWssRXyr/MXc7IwFHS3NRF1tXYSdra21awjuLSj+
+wP12HpiersL+t+5+Er9ZDpEMNufrXj+TNI/3b4g/fokClrkyUB9BgXBwJcxl0MA9IxMXPJTYcCFA
+/o0SGmrImOFIqYwk1XG0J6YjFxgkPZ7SIbILKZDfWkaUsS/mSig3V9isuO0kr1Y9c/wsCkSoq6Vg
+hpI4qrRd1JQSjaIC2gEqUaQMcvLEigLT1JAum2BswS4fTZy7uFq4KJXPzLEh1sYNS/dCKLAp3Cqi
+W4/vB1l5KXKxghZwYL887RWmAIoxU8PhHjuurOkcX8EfCXLeSLbC57cai45OTPHkaWQcI/ayHFqv
+0tWOW/8jJvmv7M6wqUL2yro3adJjaeuWHZVa7uO/sxqEZ2T3QdGPnxcX3hX78OAgbiteDJNc87qF
+490zr307ZhE5y291jwO39rSWD3VPr94cfuiD/vPdt7qeCdy4RiB++TEnIDY3EdiDLcZx91telNS3
+XDiX+cQMcK5UZ6B0CEq1EH/ZSVihhX91OBQ/A76mIYAfogMedTLy9s2LiYmjHGU6NngiDeeh2A1r
+zwCpX1sqejBaiRw82J9QTPrWEZH/xXdgfzNOIyV76W2WJZJdetkXMEo2khuLWC7zZGw9XpOmPFZ8
+iRGOcKqJZj8OtKllNIvYdFhLJZTlw5hCwoVkn35+NeFZiApaDBGJLgGXVrQ8CikbI/6k5ZwHMhrm
+Uc79cpWmL0haJUMDqcXpjZiemGpSZEKVUqtPyaoGoITmgecwb6oDy62X0DrqrpL4x0pkjVpCMuyQ
+uRYCCZqiymWXC9GO46Vb01ILImGrYltTstx+C2644o5Lbrnmnotuuuquy267dhQAADs=
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1c.gif
+
+R0lGODdhrACAAPAAAP///wAAACwAAAAArACAAAAC/oSPqcvtD6OctNqLs968+w+G4kiW5omm6sq2
+7gvH8kzX9o13wZ73vrIL/oa5wIFHTLp4wqNRCV0xn82o9YREVK/cUFb77Io92fL4zClP0exLMPxu
+y+f0uv2Oz+v3/L7k66enFoinFkY497WFyAYIyHj2+AjZNTlJaWV5ial0ucgJtfkJSrQJMErqY3q6
+mlrTiupq08oqO0Rba9uDm6t7wxvru3QIESwsRVzMe0yybGDMbOL8PB2tk/xXba2h3but0t2NjG0n
+Lg5OXmd+jsLemZ4NT/Mmj8ZeP4PkrorfSNVfCWCUONQKFhLIj2ACfQgzNYwArYLCbAbv7AMTsQG9
+/ofPWHEM9ZEBHICHLgY6N6UkuY0hZd0zokilSVsvgbT8tvCmo5sfks2cp7NkEWIZBwZ1MjGGJJ6/
+WhLcCFQk01dTf3j6CQOrzRemipbSqawqRQdaW9R84DUNLLFZQ+JKyw0f3F0fi8510+9u0wzO9E5Y
+VhYdBrh+ISIM3I6jtsJk+yKW9nAd24oUGLe1UNjyVryTE2PmqdlJXDGOe4pF2RlyZZMXX6ZuJvDn
+PnehUwDD6prMaxG3S6AG8dj0WN9uq9ZWHdYzXt7B1Rq2XQ33bt3JoR/W2nw02ukYVxPnrl0j+O7D
+Rxz3Au+8YbnT1VMXr3Qt9FvpsktNP95+ZfHjzfnDR9ffNbNcxYJ75unXWID/gVQEDgguZ42Bwm0j
+IU4TDmUhGA5WeJCC2yUxEYcayZBSRSzRg9GJwP3TkTeIrOGiDimqiNQiMKaU1EE5gRgHVCeiWA5R
+Hv7F4io/5qhWfkJ+VVAT7B0JmpI7fgVTlYtBGRl4TwEp4oZQJvigMpxgORJlQw3p5RYMvYMmkzHe
+IsyapIW515tXIJnIKELQiR6funUJ5xEOtckmngACKgiHUGUYlzFYMmqdoZBOSmmlll6Kaaaabspp
+p552UQAAOw==
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1d.gif
+
+R0lGODdhrACAAPAAAP///wAAACwAAAAArACAAAAC/oSPqcvtD6OctNqLs968+w+G4kiW5omm6sq2
+7gvH8kzX9o1rwZ73vrIL/oa5wIFHTLp4wqNRCV0xn82o9YREVK/cUFb77Io92fL4zClP0exLMPxu
+y+f0uv2Oz+v3/L7k66enFoinFkY497WFyAYIyHj2+AjZNTlJaWV5ial0ucgJtfkJSrQJMErqY3q6
+mlrTiupq08oqO0Rba9uDm6t7wxvru3QIESwsRVzMe0yybGDMbOL8PB3dUc2abI2l/de9XYLdC44i
+Pk4e/h0Bjb5hnt2enhYvT//zbl+fX6Se0cS+j5qIN1T6BXTiBeG5gwzeTTmEhCDDBvjWKIxoMF/F
+/mSDFk70WMERxIJOMoLbqAUISWoAo6Fk+W9lSXycHMaMcwreApz2aH7g2c7nA2AtXVVUZhImupcO
+imZLCsocLqdPt4lrSbUqs6tQdVoAagsb1axPu/YRa5alP7BR00p9S9bOtLhqdbBlNDetSr1g6Dbq
+KtTnXT/L/CYIbLgSVKEKySTOlPTxYb4NJSchqu+n5XsmGe+kTHEzv3WePzcTPStj6c+gm6KeAWs1
+63SvYcRmUbtson6yXbceOviKqdyhfwMnzs11DOS6xYgyvhb6celSitNgrnR3aurT22Anzb17pPA6
+bH8H0XtMcM7H1n9Elt4d+TsScbj3Vf/XfMeKpOKHlvGQQDARtAWB+V2zkkx4GYHRQH0Z2B9YFj10
+n3fE+CefEASWBSF9F+6XBkmrQHggf8hMVoqIEYFH4m8YCtgYZwzOiFaLboE404AF4ciPjb69GBKP
+MrZ4kZBuAHnLgQ1ehiRkMHYizJKKGckeSJA1idsoGlIpzXmneblLSlGAKdyGy5WoEXJmvvcjbz6y
+iSCacM5JZ5123olnnnruyWefXBQAADs=
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1e.gif
+
+R0lGODdhnwB9APAAAP///wAAACwAAAAAnwB9AAAC/oSPqcvtD6OctNqLs968+w+G4hiU44mmXcmq
+7gsvwWHG9u2ZLT3j/m/R9XbAorFRQxCPzGNS2WtKgcnq9OqrCrFcGCv67YrH5LL5jE6r1+y2+514
+wucOLf0eB8vx8OeS/ya3B8i2N0iYNniIaKa4yDh2+AdZtjhJKfZ4iYn1CLDJKeX5ORpKFVWHajpV
+SrraqZr6yhqL1Drrcktai3uju9tb9AscnMX7AFqMMmyQrCzC3Hz8TDKNbE39ES2dnYud+t2dsS0d
+Lh5kjnR+Qr6e0u7Onh7vNS+x40zPAx3mqg8BL84+f/9kaRCCqsYXe9ngbRmokOEzh7HsECwIhYOg
+/oRD9Eh8RVGJgog88ikLWQ5fxzwme7Xrt3AIsZEtZwXUVtPUTRD9Gn6kUW1noJ/cghKlQ06ojJyE
+tjHF0NPmR6XXqFaS+HTDQpBYj0KNSomZVQpbMQ3Lyg/tmbNecaol82us1reZ0tF9d/eKLrlu2zK5
+lfcF2DaA/dbjKzgc4mWBjUVobGxxtceGT0nmiQ2ysMF1AVZ2whnWNUZlO9v6TEszZoNmQxuxhLru
+ZbKncbnWG7uR6hC7E/VekVvN7R+z1/6+UBzNcIyHg7MuWDpx8j7LVzPPKI+YnyXH1z20qLDo9YOq
+HPnTEjO9c9LlObaIWVK9/PnTMbfdCHHGS/r8gdVzuYlfUQg1o0J/BkZXoFcwlfWeft1VcGCEXT1I
+E4V4SdhffjggGJaB2E1Xn24MrlchfNSkJ14M0XEYikcrjWfULgOGOAGLhG1kIWM0QlgdIjneY+OJ
+KKblB4wl1ghFkEYCKd+STvrY45MaRSkleT8uqWSVOVCpZZdefglmmF0WAAA7
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1f.gif
+
+R0lGODdhUABzAPAAAP///wAAACwAAAAAUABzAAAC/oSPqcvtD6OctNqLs968+w+G4sgEJok+5pq2
+SXCc7niyMTzTsGznoozo+T7AIG5IPAKPyM6yxmxqVkqh9IrNarfcrpdb/E6rYswzWo4UrWlVNNx2
+wOHxBZ1eN9rxeQCe3eeHdjOYxydYGHeIGHgDAdi2aCDpRSnYaHnZlwn5lclY9wkamdjQuSU6mZqz
+OupZ6kaa0dpCq/k6Bttk64qq+yjGmyZcRhz8a2FzGmJspIzsBC1BduvCC8XEQ2UtXbKTjaNd272n
+8KQ6zhG2Fk5eIbxm3p6+cfaMnnL9vO3Xq9NIoVkldy+OqSOIwpZAD7SWSWmIMB9Bhw8nRpR4YSGI
+glQUr3C8SG+CRmbSOmL5NJKkyJQbobFsOQ0kq18mtVB6qdKNzJmPdvKU4/Ont6AzDuH85w1gEFNH
+kTQdUjPQUx9TqRJVKvVqFn5YY3V1dI8QOK3RNJ0zi8+gHnlmydZ7MxZbVKFpxVXNCNfRJWXF9u3b
+O/er4MGECxs+jDix4sUcCgAAOw==
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1g.gif
+
+R0lGODdh4gCBAPAAAP///wAAACwAAAAA4gCBAAAC/oSPqcvtD6OctNqLs968+w+G4kiW5omm6sq2
+7gvH8kzX9o3n+s73/g8MCofESOBYTCo5x+byCTUekNEqFOmcBqzcJXYLyHbHQypCTE73zGew+q0z
+y+F0nPxbz8+abr7+DxgoeDZY+OJmmIiCaMCo+Ljh6AhJaTGJyFapWcF4t/kJ0dmXCVoapsCGZgoq
+KbqqONm4QEr6qhcri3qJa6vGG1ur2vvGezoLXDvcVYybHOasfKUBLRwtPc0MbV3GVPzsve0DHgqu
+Hb4mkZ0+fi4zJ/VgrtXO42cM7yDfqE/vwp8bj923fntSCbyX72A1ginAeJow7t++gwy77ZsHcd2F
+/oUVRwTDVI2dRC0UO27c1YYPJoglL5o8kWXUMZUKWz4DwhGQPZoMaIq0efPHSEMfVZLDBrRhUp3Z
+7B2LNHSF0Vc5SQqLSkicw6V1/vF0SYcKVqaWfJJxKpZr1z6cpnpx2wYs1S02v3aoWlZi2pROH/Vt
++w1vQMEN7FoayNfn2ChjDf5NhxFfUH+KCVuxrGvm43lokpmtV3mx1rq/DHMGyfdKaLU1NhspZ5gW
+69GVvcil4DWT7tmRMntcLURmWYtTcuzm3XN1K+QZI+Neesd1C9mH4OYS7WHk4p3Wqyc3vtUG5snE
+kDHPYNpdTaXeC2PPfh6qQNHext9VB8MxQKXN/uZDr//eOgBSphkL3Tl3FHoRBZjgYIkI9xRLCv4U
+XwL62PfEVaVJiIFeDH7H4W8V4nYbNT91qN2HvoX4gTwjYmRQgwGhiGJ842EI4mvsrZgQbCchRcJQ
+OMbF0ovk7Seje3nJ91uNCg7Hnyzp6TIgYN3w1lhLJanY41bSEZmQlfeFsJ2Rt7W2YZhFghAgfeaU
+uQNH2uQmwnvYyckVl/f1p+ZrzLmplmyBmunkTEpqFGRSDD7UIqE05shjn4liw+aXjwplHqTuvRiV
+ikNuGhwymo4q4o91IqfnpFRG2KMKN97pSqOOXskqmIe6SidUhsKXREitzDgdP1m2Smuv1FlY/tqs
+E+l4Emz/ZXgsgsjGgFeKYhb6liiokWqgiYeZeim0sSKZEg14StWpsomuhKi5npUD35bqqtrWvLvW
+WymUy1CUaof6krneWf4xVqFl/arHYhEHL8tsGp8GsbCtt/riTMTx2nsmshhHqfHGHFqcXJpdTRzq
+HsTeQtdeE9Vm1WciggzuH3gceVdiLge2m1w3t0eWxGuE17JiL2kKM5MVK3eqx9SOC4dyeSqdH9My
+I/1vINxdLYjTXUKN6YNUB1W0alwv3ZfK1jxcXsbKjC0e0AyhTbDa9Fgq9i4pD21VFQfiTWJxobJt
+y87B0s03THAPdnjhJuwd9JSKKyH445JPEk555ZZfjnnmmm/Oeeeef/5EAQA7
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1h.gif
+
+R0lGODdhwgB6APAAAP///wAAACwAAAAAwgB6AAAC/oSPqcvtD6OctNqLs968+w+G4kiW5omm6moF
+7vPCMUvXqYszeCDn9g/88AyzRVExBByDzKaO5yMmo8qk1Cp1areJVyw6nBXD2CX3/FvmvtN29mBG
+y1lmL/ZdNd7nfJV4mofk1tVXWPMHlRgG17a4E2cY2bHDiEhGWcWGKcnZ6fkJGio6SlpqeoqaqloB
+uerq8fcqC9s4a5sx1nq7K9i1xwvs2xtMPCxcjBzo+5s8G0fVfAsJHS3bSl29qoudjaqb2f36rRye
+Ok5ebnqOnj66zt3uuQ4e7878dF9fOH+lD8rfz18ngAEFRiKIx6AhhOzQwOvGsOGZiNLy9dhnMRrF
+/odNHtWjqARjwnAgF5KJV5LLJjYoM/Z5tIdlu5TLQmySIPPKTWA0K0WEiYueT5gcT/UMOdKBlaMT
+iHrU5rKBnaW/iPJxujMUSDsIcjGlg/Uriq13xE4MGzUI2WNOyqalgPatH7nGkG45UnRSXEF0MazV
+aRauWxtACUkUsdFHYbVV+5bIeSJw28aORyyOXLlpZr/38s49tNmiZxDbNuOiuuhGaNGSa8oArad1
+18rnRnMYZxvq6ai5T+OUPYchv94t0pol/vlCb+SaWZlmq5QxZ87PYzuv/q56ceW0xRJkzkiwdufF
+M4OX2pc5QOBPtt8++jM9dybDsY9PvIJ9e83a/mmSZb2Bfvv9hthzJcFz4Hjz/abgYfzRwheEHfHW
+YFLkCTEIhpMRaEJ8pGX1nha4tYYQU+dZtyEEshH3lYkVLqgUcLmdiE5PNEoYI1jGrYaiXirlI6BQ
+KnYXo2k34tijjhGUOCKPP+aYxjfrvZXYi9MNGGVncqVH5EToWckgevkxKQ+YD+qxJC10BanBke+t
+aeOWZto0J1zuFXihJGx+2GF2ZYqyYm11ZqPfiHoO+iaiaBZp0p7uOSpkXSL9qRajDimCx15DXUan
+m3gGl4iFAc4WFqnQQGaVdKBC99JJm6ZKUhmKtskVPqV2epCsFaHlo0ms7hIXnI1eohikhGlqVOus
+mDUTbHgOAmrsZDdBBpWyvj5rVEuiOhMtfa4iA6JR2Kxh7Y/dBhiuQnati1G5tsB6bLrqJjrWU/Nm
+Wdqt97Zq777+/gtwwAIPTHDBBh+McBAFAAA7
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1i.gif
+
+R0lGODdhqQB5APAAAP///wAAACwAAAAAqQB5AAAC/oSPqcvtD6OctNqLs968+w+G4kiW5omOwfqw
+rZvGcrbWTB289sz37QFbBBU5w9CHTLF2xiKA+XQ2pc2kVbYsMrXOIDdxvIpDR5sLhv4CqeP2J5wV
+dtlRt508B9aJefD9/zaXk6W1tlaIEwa4qCPoOLWDA6nIWGl5iZmpucnZ6fkJGioaQTlqStp3qvpy
+uOp6IwX1+jpUOitaRnc7Cqe7C9rr+9upKDv8SWl8zFmqvJxp6/xsaRslPA1YvYcNfW3IjaldBU7t
+3UrOKD6Fvqi+zn7n/g7fJj9Pf2V/j4+kP85vxd82gD4EDiQ4w6A0hCUMWmOY0NwPiFgkUqxn8aIY
+/ocaK6o4w/FiSDCSDnasMFLPuJQMHRJCAHLhSVgc4nwDOZMCx1w3M87cScWLmoc5aW7wwudfoqJJ
+jzrCeXAp038YSiZCVEwmRJY1tRLkahQV2Fk7IXg95BMcULPySopMC1Pi2bhjTQmcO5cu3GF3febV
+i9DfX6IWpOITvHcw2r2r9Cl8rFiVvcjnaLjlNpkx3a6UgfnVTNLD5WXuOjftMPpXadByQKQma9F0
+WNGyy02oa5Iz63RydzsY+5qXudqsPuLuN9y3jobEx1RrvpyE4VDPlYs1Md1TNOsSoMvxHvH38Qbg
++ZRH0Yy7zvGTmPliHx39eenk4ceXbx+7+qr5wq3tjzFfYf35p91/NCA3oFMtBeiagdQxOBV/CbJV
+VHZJBPcWhN05iBoUGrbWw0vbXHWVXiQ2uBJVpA0y1BsmnrhYUCxWASNsoVWyVIkklnhKLRwqWMd2
+O4IHoY84fhGJWEPuxp6RR86IYSNDXjCeVVJ96MaSC1kY0I+8adnTH1h+6WGL8Ux4CVQ4bmVmmmhm
+2WY3b+JHhxle6jcnbWPaEYsme8oZJZ15PtgklxFKKWWNh+Jh6KKOPgpppJJOSmmlEBQAADs=
+
+------=_NextPart_000_0000_01CBF703.0484B680
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/color1j.gif
+
+R0lGODdhTQBtAPAAAP///wAAACwAAAAATQBtAAAC/oSPqcvtD6OctNqLs968pwA+oTh6FYgyaECm
+5sQa5TIrMVC/SOjKd4+7+YQ+XYMX6yV/wuWHaDzkUqOS1SmFRos2Vi6YpWm3YC6u/Ax/yEem951U
+B+Orr3GVvVbrwyWeDRgoOEhYaHiIiGiXuHHF2KH32Ni0KAlRU2npMDWmuamV6ZnW1Sk6Smp62QmU
+2vVZaprJ2mrWBqsZikZb+7krp+qr2+Kbm7dbbNyKnBx7K+ZcuLwjDUj9iwst1qxhvdU95PkNbiku
+E54dzJtOsg6D7u4XWP68J/9+qTYPzA033XfvjgMSf2X0aZvkiovBhPxOFQQYYd4MKPWiSHTjouId
+moh5/GScQ2YhOY7KSJrDJtCkCXEiEWKYxehbS5cWYMaEOJMmhZw6Jdh8RI1nz30ldwod2utYtp8j
+AxKDdhSSM6YoiT5VpdKe1atJ11WiKupr1kGLoupYZZbs2JFrJaUV9BZu23bp4rL5Q5dd3jAZKU20
+G/GNmYpYzjnkW7jqLz515vZ0BAawUzn1Pp7b84cKHMd7O3v+DDq05wIAOw==
+
+------=_NextPart_000_0000_01CBF703.0484B680--

@@ -1,0 +1,139 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Errata: Modern Compiler Implementation in Java
+Date: Sat, 9 Apr 2011 22:16:16 +0800
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.cs.princeton.edu/~appel/modern/java/errata99.html
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5994
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Errata: Modern Compiler Implementation in =
+Java</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; charset=3Dgb2312">
+<META content=3D"MSHTML 6.00.2900.6058" name=3DGENERATOR></HEAD>
+<BODY bgColor=3D#ffffff>
+<H2><FONT color=3D#d00000>Modern Compiler Implementation in =
+Java</FONT></H2>&copy;1998=20
+by <A href=3D"http://www.cs.princeton.edu/~appel"><STRONG>Andrew W.=20
+Appel</STRONG></A><BR>
+<H2>Errors in the first edition, 1999 printing:</H2>This printing may be =
+
+identified by the line "Reprinted with corrections, 1999" on page iv.=20
+<P><STRONG>Page 20.</STRONG> Figure 2.2, second-to-last line should not =
+have=20
+double quotes around \n and \t:<BR><TT>("--"[a-z]*\n)|(" "|\n|\t)+ =
+{</TT>=20
+<B><I>/* do nothing */</I></B> <TT>}</TT>=20
+<P><STRONG>Page 31.</STRONG> Program 2.9, second-to-last line should not =
+have=20
+double quotes around \n and \t:<BR><TT>("--"[a-z]*\n)|(" "|\n|\t)+ =
+{}</TT>=20
+<P><STRONG>Page 55.</STRONG> After the sentence, "The resulting =
+productions will=20
+not pose a problem for a predictive parser" add:<BR>Although the grammar =
+is=20
+still ambiguous -- the parsing table has two entries for the same slot =
+-- we can=20
+resolve the ambiguity by using the "else <I>S</I>" action.=20
+<P><STRONG>Page 57.</STRONG> First line: <TT>TIMES</TT> should not be in =
+
+<TT>Tprime_follow</TT>.=20
+<P><STRONG>Page 66.</STRONG> First line of left-hand box: change =
+ampersand=20
+(&amp;) to $.=20
+<P><STRONG>Page 79.</STRONG> Lines 11-12 should read,<BR>3. Discard =
+input=20
+symbols (if necessary) until a lookahead is reached that has a non-error =
+action=20
+in the current state.=20
+<P><STRONG>Page 83.</STRONG> Line 15, <TT>tiger.grm</TT> should be=20
+<TT>Grm.cup</TT>.=20
+<P><STRONG>Page 104.</STRONG> The Tiger program shown is actually =
+illegal, since=20
+g is declared to return no value but its body returns the value f().=20
+<P><STRONG>Page 118.</STRONG><BR>9th line from bottom, =
+"<TT>enventry</TT>"=20
+should be "<TT>Entry</TT>".<BR>3rd line from bottom, "<TT>UNIT</TT>" =
+should be=20
+"<TT>VOID</TT>".=20
+<P><STRONG>Page 119.</STRONG> Figure 5.8, lines 3 and 4 should=20
+read,<BR><TT>Symbol.Table venv; </TT><I>// value=20
+environment</I><BR><TT>Symbol.Table tenv; </TT><I>// type =
+environment</I><BR>
+<P><STRONG>Page 120.</STRONG> 7th and 8th lines after figure should=20
+read,<BR><TT>Translate.Exp transDec(Absyn.Exp e) { ... =
+}</TT><BR><TT>Types.Type=20
+transTy(Absyn.Ty e) { ... }</TT><BR>5th line from bottom and 4th line =
+from=20
+bottom should refer to <TT>Types.Type</TT>, not just <TT>Type</TT>.=20
+<P><STRONG>Page 121.</STRONG> line 4 should read,<BR><TT>public abstract =
+class=20
+Exp {}</TT>=20
+<P><STRONG>Page 128.</STRONG> Exercise 5.1 (b) should read, "Explain how =
+the=20
+object-oriented implementation of <TT>HashT</TT> allows several =
+different tables=20
+to be in use simultaneously."=20
+<P><STRONG>Page 143.</STRONG> Table 6.4. The MIPS column of the table =
+uses=20
+registers r2, r4, r5 for passing parameters. The use of r2 for the =
+"zeroth=20
+parameter" is consistent with the MIPS convention of passing the static =
+link in=20
+r2; the argument <I>x</I><SUB>1</SUB>, by this point in the compilation, =
+is=20
+really the static link.=20
+<P><STRONG>Page 183.</STRONG> 7th line from bottom, change "whether two=20
+expressions commute" to "whether a statement commutes with an =
+expression".=20
+<P><STRONG>Page 226.</STRONG> Table 10.5 in the 4th iteration, the =
+<I>out</I>=20
+set for statement 3 is <I>c</I>, when it should be <I>b</I>.=20
+<P><STRONG>Page 245.</STRONG> Assignment statements on line 19 should =
+say,=20
+<BR><I>t</I>:=3D<I>M</I>[<I>b</I><SUB>loc</SUB>];=20
+<I>M</I>[<I>a</I><SUB>loc</SUB>]:=3D<I>t</I>.=20
+<P><STRONG>Page 247.</STRONG> Figure 11.7, captions (a) and (b) are =
+missing.=20
+<P><STRONG>Page 249.</STRONG> Last sentence, swap "afterward" and =
+"beforehand".=20
+<P><STRONG>Page 252.</STRONG> Delete last bullet item entirely ("When =
+<I>u</I>=20
+is coalesced ...").=20
+<P><STRONG>Page 258.</STRONG> Line 8, change all three occurrences of=20
+"nodeMoves" to "moveList".<BR>Insert new line, "EnableMoves(v)".=20
+<P><STRONG>Page 281.</STRONG> Algorithm 13.5, after second line, =
+insert:<BR>mark=20
+<I>x</I>=20
+<P><STRONG>Page 376.</STRONG> 8th line from bottom, delete the word =
+"not".=20
+<P><STRONG>Page 438.</STRONG> 11th line from bottom, change "block 1 and =
+block=20
+2" to "block 1 and block 3".=20
+<P><STRONG>Page 439.</STRONG> FIGURE 19.3 (b), the assignment c1 &lt;- =
+c1 + b2=20
+should be c1 &lt;- c2 + b2=20
+<P><STRONG>Page 444.</STRONG> Line 2: "that are not dominated by" should =
+be=20
+"that are not strictly dominated by" <BR>Line 22: "if n does not =
+dominate w"=20
+should be "if n does not dominate w, or if n =3D w"=20
+<P><STRONG>Page 445.</STRONG> Algorithm 19.6, line 10 should read,<BR>if =
+
+<I>a</I> not in =
+<I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>Y</I>]<BR>Algorithm=20
+19.6, line 14 should =
+read,<BR><I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>Y</I>]=20
+&lt;- <I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>Y</I>] u {<I>a</I>}.=20
+<P><STRONG>Page 457.</STRONG> Line 2, first occurrence of <I>i<I> should =
+be=20
+<I>i</I><SUB><SMALL>1</SMALL></SUB>=20
+<P><STRONG>Page 460.</STRONG> Line 6, change "10" to "1".=20
+<P><STRONG>Page 499.</STRONG> Exercise 20.2g, "Run Algorithm itermod" =
+should be=20
+"Run Algorithm 20.9".=20
+<P><STRONG>Page 529.</STRONG> 4th line from bottom, change both =
+occurrences of=20
+"<TT>integer</TT>" to "<TT>int</TT>". </P></I></I></BODY></HTML>

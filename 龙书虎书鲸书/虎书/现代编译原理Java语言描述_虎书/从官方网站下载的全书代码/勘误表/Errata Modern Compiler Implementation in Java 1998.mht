@@ -1,0 +1,875 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Errata: Modern Compiler Implementation in Java
+Date: Sat, 9 Apr 2011 22:16:02 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0007_01CBF703.B61A71A0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5994
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0007_01CBF703.B61A71A0
+Content-Type: text/html;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.cs.princeton.edu/~appel/modern/java/errata98.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Errata: Modern Compiler Implementation in =
+Java</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; charset=3Dgb2312">
+<META content=3D"MSHTML 6.00.2900.6058" name=3DGENERATOR></HEAD>
+<BODY bgColor=3D#ffffff>
+<H2><FONT color=3D#d00000>Modern Compiler Implementation in =
+Java</FONT></H2>&copy;1998=20
+by <A href=3D"http://www.cs.princeton.edu/~appel"><STRONG>Andrew W.=20
+Appel</STRONG></A><BR>
+<H2>Errors in the first edition, first printing (1998):</H2><STRONG>The=20
+following errors also appear in the 1999 reprinting of the =
+book.</STRONG>=20
+<P><STRONG>Page 20.</STRONG> Figure 2.2, second-to-last line should not =
+have=20
+double quotes around \n and \t:<BR><TT>("--"[a-z]*\n)|(" "|\n|\t)+ =
+{</TT>=20
+<B><I>/* do nothing */</I></B> <TT>}</TT>=20
+<P><STRONG>Page 31.</STRONG> Program 2.9, second-to-last line should not =
+have=20
+double quotes around \n and \t:<BR><TT>("--"[a-z]*\n)|(" "|\n|\t)+ =
+{}</TT>=20
+<P><STRONG>Page 55.</STRONG> After the sentence, "The resulting =
+productions will=20
+not pose a problem for a predictive parser" add:<BR>Although the grammar =
+is=20
+still ambiguous -- the parsing table has two entries for the same slot =
+-- we can=20
+resolve the ambiguity by using the "else <I>S</I>" action.=20
+<P><STRONG>Page 57.</STRONG> First line: <TT>TIMES</TT> should not be in =
+
+<TT>Tprime_follow</TT>.=20
+<P><STRONG>Page 66.</STRONG> First line of left-hand box: change =
+ampersand=20
+(&amp;) to $.=20
+<P><STRONG>Page 79.</STRONG> Lines 11-12 should read,<BR>3. Discard =
+input=20
+symbols (if necessary) until a lookahead is reached that has a non-error =
+action=20
+in the current state.=20
+<P><STRONG>Page 83.</STRONG> Line 15, <TT>tiger.grm</TT> should be=20
+<TT>Grm.cup</TT>.=20
+<P><STRONG>Page 95.</STRONG> Program 4.6, the identifiers <TT>Num, Id, =
+Plus,=20
+Minus, Times, Div, Eseq</TT> should be <TT>NumExp, IdExp, PlusExp, =
+MinusExp,=20
+TimesExp, DivExp, EseqExp</TT>. <BR>Program 4.6, lines 12,16,20,24, all=20
+instances of <TT>aa.eval</TT> should be <TT>a.eval</TT> and all =
+instances of=20
+<TT>bb.eval</TT> should be <TT>b.eval</TT>.=20
+<P><STRONG>Page 104.</STRONG> The Tiger program shown is actually =
+illegal, since=20
+g is declared to return no value but its body returns the value f().=20
+<P><STRONG>Page 118.</STRONG><BR>9th line from bottom, =
+"<TT>enventry</TT>"=20
+should be "<TT>Entry</TT>".<BR>3rd line from bottom, "<TT>UNIT</TT>" =
+should be=20
+"<TT>VOID</TT>".=20
+<P><STRONG>Page 119.</STRONG> Figure 5.8, lines 3 and 4 should=20
+read,<BR><TT>Symbol.Table venv; </TT><I>// value=20
+environment</I><BR><TT>Symbol.Table tenv; </TT><I>// type =
+environment</I><BR>
+<P><STRONG>Page 120.</STRONG> 7th and 8th lines after figure should=20
+read,<BR><TT>Translate.Exp transDec(Absyn.Exp e) { ... =
+}</TT><BR><TT>Types.Type=20
+transTy(Absyn.Ty e) { ... }</TT><BR>5th line from bottom and 4th line =
+from=20
+bottom should refer to <TT>Types.Type</TT>, not just <TT>Type</TT>.=20
+<P><STRONG>Page 121.</STRONG> line 4 should read,<BR><TT>public abstract =
+class=20
+Exp {}</TT>=20
+<P><STRONG>Page 128.</STRONG> Exercise 5.1 (b) should read, "Explain how =
+the=20
+object-oriented implementation of <TT>HashT</TT> allows several =
+different tables=20
+to be in use simultaneously."=20
+<P><STRONG>Page 143.</STRONG> Table 6.4. The MIPS column of the table =
+uses=20
+registers r2, r4, r5 for passing parameters. The use of r2 for the =
+"zeroth=20
+parameter" is consistent with the MIPS convention of passing the static =
+link in=20
+r2; the argument <I>x</I><SUB>1</SUB>, by this point in the compilation, =
+is=20
+really the static link.=20
+<P><STRONG>Page 183.</STRONG> 7th line from bottom, change "whether two=20
+expressions commute" to "whether a statement commutes with an =
+expression".=20
+<P><STRONG>Page 226.</STRONG> Table 10.5 in the 4th iteration, the =
+<I>out</I>=20
+set for statement 3 is <I>c</I>, when it should be <I>b</I>.=20
+<P><STRONG>Page 245.</STRONG> Assignment statements on line 19 should =
+say,=20
+<BR><I>t</I>:=3D<I>M</I>[<I>b</I><SUB>loc</SUB>];=20
+<I>M</I>[<I>a</I><SUB>loc</SUB>]:=3D<I>t</I>.=20
+<P><STRONG>Page 247.</STRONG> Figure 11.7, captions (a) and (b) are =
+missing.=20
+<P><STRONG>Page 249.</STRONG> Last sentence, swap "afterward" and =
+"beforehand".=20
+<P><STRONG>Page 252.</STRONG> Delete last bullet item entirely ("When =
+<I>u</I>=20
+is coalesced ...").=20
+<P><STRONG>Page 258.</STRONG> Line 8, change all three occurrences of=20
+"nodeMoves" to "moveList".<BR>Insert new line, "EnableMoves(v)".=20
+<P><STRONG>Page 281.</STRONG> Algorithm 13.5, after second line, =
+insert:<BR>mark=20
+<I>x</I>=20
+<P><STRONG>Page 376.</STRONG> 8th line from bottom, delete the word =
+"not".=20
+<P><STRONG>Page 529.</STRONG> 4th line from bottom, change both =
+occurrences of=20
+"<TT>integer</TT>" to "<TT>int</TT>".=20
+<H4>The following errors have been corrected in the 1999 reprinting of =
+the=20
+book.</H4>
+<P><STRONG>Page 29,30.</STRONG> The state labeled 5,6,7,8,15 should be=20
+5,6,8,15.<BR>The state labeled 10,11,12,13,15 should be 10,11,13,15.=20
+<P><STRONG>Page 44.</STRONG> Figure 3.3, the rightmost semicolon should =
+be a=20
+comma. Also, the part of the derivation corresponding to "c +" is =
+missing from=20
+the tree.=20
+<P><STRONG>Page 50.</STRONG> Lines 11-20 should read, <PRE>for each =
+production X -&gt; =
+Y<SUB><SMALL>1</SMALL></SUB>Y<SUB><SMALL>2</SMALL></SUB>...Y<SUB><SMALL><=
+I>k</I></SMALL></SUB>
+    if =
+Y<SUB><SMALL>1</SMALL></SUB>...Y<SUB><SMALL><I>k</I></SMALL></SUB> are =
+all nullable (or if <I>k</I>=3D0)
+        then nullable[X] =3D true
+    for each <I>i</I> from 1 to <I>k</I>, each <I>j</I> from <I>i</I>+1 =
+to <I>k</I>
+        if =
+Y<SUB><SMALL>1</SMALL></SUB>...Y<SUB><SMALL><I>i</I>-1</SMALL></SUB> are =
+all nullable (or if i =3D 1)
+            then FIRST[X] =3D FIRST[X] u =
+FIRST[Y<SUB><SMALL><I>i</I></SMALL></SUB>]
+        if =
+Y<SUB><SMALL><I>i</I>+1</SMALL></SUB>...Y<SUB><SMALL><I>k</I></SMALL></SU=
+B> are all nullable (or if i =3D k)
+            then FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] =3D =
+FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] u FOLLOW[X]
+        if =
+Y<SUB><SMALL><I>i</I>+1</SMALL></SUB>...Y<SUB><SMALL><I>j</I>-1</SMALL></=
+SUB> are all nullable (or if i+1 =3D j)
+            then FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] =3D =
+FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] u =
+FIRST[Y<SUB><SMALL><I>j</I></SMALL></SUB>]
+</PRE>
+<P><STRONG>Page 51.</STRONG> Algorithm 3.13, lines 6-15 should read, =
+<PRE>for each production X -&gt; =
+Y<SUB><SMALL>1</SMALL></SUB>Y<SUB><SMALL>2</SMALL></SUB>...Y<SUB><SMALL><=
+I>k</I></SMALL></SUB>
+    if =
+Y<SUB><SMALL>1</SMALL></SUB>...Y<SUB><SMALL><I>k</I></SMALL></SUB> are =
+all nullable (or if <I>k</I>=3D0)
+        then nullable[X] &lt;- true
+    for each <I>i</I> from 1 to <I>k</I>, each <I>j</I> from <I>i</I>+1 =
+to <I>k</I>
+        if =
+Y<SUB><SMALL>1</SMALL></SUB>...Y<SUB><SMALL><I>i</I>-1</SMALL></SUB> are =
+all nullable (or if i =3D 1)
+            then FIRST[X] &lt;- FIRST[X] u =
+FIRST[Y<SUB><SMALL><I>i</I></SMALL></SUB>]
+        if =
+Y<SUB><SMALL><I>i</I>+1</SMALL></SUB>...Y<SUB><SMALL><I>k</I></SMALL></SU=
+B> are all nullable (or if i =3D k)
+            then FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] &lt;- =
+FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] u FOLLOW[X]
+        if =
+Y<SUB><SMALL><I>i</I>+1</SMALL></SUB>...Y<SUB><SMALL><I>j</I>-1</SMALL></=
+SUB> are all nullable (or if i+1 =3D j)
+            then FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] &lt;- =
+FOLLOW[Y<SUB><SMALL><I>i</I></SMALL></SUB>] u =
+FIRST[Y<SUB><SMALL><I>j</I></SMALL></SUB>]
+</PRE>
+<P><STRONG>Page 54.</STRONG> Table 3.16 caption should refer to Grammar =
+3.15,=20
+not Grammar 3.8.=20
+<P><STRONG>Page 58.</STRONG> Figure 3.18, 7th line from the bottom, the =
+second=20
+occurrence of <TT>id</TT> should have subscript 20, not 4.<BR>Figure =
+3.18, 5th=20
+line from the bottom, "(S;E)" should be "(S,E)" at the end of the line.=20
+<P><STRONG>Page 59.</STRONG> Table 3.19, row 9, is missing some entries. =
+In=20
+column "id" the entry should be "s20", in column "num" the entry should =
+be=20
+"s10", and in column "(" the entry should be "s8".=20
+<P><STRONG>Page 66.</STRONG> In the left-hand box, the lookahead for the =
+last=20
+two lines should be =3D, not $.=20
+<P><STRONG>Page 67.</STRONG> Figure 3.27 shows the LR(1) states for =
+Grammar=20
+3.23, not for Grammar 3.26.<BR>In Figure 3.27, states 4 and 7, the =
+lookahead for=20
+T-&gt;x should be "$,+" and not just "$".=20
+<P>The LR(1) states for Grammar 3.26 are as follows:<BR><IMG=20
+alt=3D"LR(1) states for Grammar 3.26"=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/evlr1dfa.gif">=20
+<P><STRONG>Page 67.</STRONG> Table 3.28a, the last entry in row 13 =
+should be=20
+<STRONG>g7</STRONG>, not <STRONG>f7</STRONG>.<BR>Table 3.28b, the entry =
+in row=20
+7, column "=3D", should be <STRONG>r3</STRONG> instead of blank.=20
+<P><STRONG>Page 68.</STRONG> The second paragraph should begin,=20
+<BLOCKQUOTE>For some grammars, the LALR(1) table contains reduce-reduce=20
+  conflicts where the LR(1) table has none, but in practice the =
+difference=20
+  matters little. </BLOCKQUOTE>
+<P><STRONG>Page 76.</STRONG> Grammar 3.35 and Grammar 3.36, the =
+<TT>start=20
+with</TT> directive should come after the <TT>precedence</TT> =
+directives.=20
+<P><STRONG>Page 97.</STRONG> The rule <TT>exps ::=3D exps COMMA exp</TT> =
+should=20
+have the following semantic action: <PRE>exps ::=3D exps COMMA exp:e     =
+          {: System.out.print(e); :};
+</PRE>
+<P><STRONG>Page 105.</STRONG> After the line "statements, we must use a=20
+<TT>seqExp</TT>.", Add the following sentence: "An empty statement =
+<TT>()</TT>=20
+is represented by <TT>SeqExp(null)</TT>.=20
+<P><STRONG>Page 109.</STRONG> Line 5 of the program fragment, delete the =
+
+semicolon after <TT>print_int(j)</TT>.=20
+<P><STRONG>Page 117.</STRONG> The second program fragment should use =
+<TT>:=3D</TT>=20
+instead of <TT>=3D</TT> in the <TT>var</TT> declarations of <TT>a</TT> =
+and=20
+<TT>b</TT>.=20
+<P><STRONG>Page 120.</STRONG> First program fragment after the table, =
+line 7,=20
+should be <PRE>   Exp transDec(Absyn.Dec e) { ... }
+</PRE>
+<P><STRONG>Page 124.</STRONG> The second line of the first code fragment =
+should=20
+read, <PRE>   env.venv.put(d.name, new VarEntry(transExp(d.init).ty));
+</PRE>
+<P><STRONG>Page 125.</STRONG> The 7th line of the first code fragment =
+should=20
+read, <PRE>     env.venv.put(p.name, new VarEntry(
+</PRE><!-- Page 129, "more then six" should be "more than six" -->
+<P><STRONG>Page 139.</STRONG> Program 6.3, line 14 should be indented =
+one space=20
+less; and should read, <PRE>            output :=3D concat(output, s);  =
+write("\n"))
+</PRE>
+<P><STRONG>Page 143.</STRONG> Table 6.4, column "Sparc", last two lines =
+should=20
+refer to <TT>i1</TT> and <TT>i2</TT> instead of <TT>i0</TT> and=20
+<TT>i1</TT>.<BR>Fourth line after the figure should refer to =
+"<TT>i1</TT> and=20
+<TT>i2</TT>" instead of "<TT>i0</TT> and <TT>i1</TT>".=20
+<P><STRONG>Page 149.</STRONG> Last sentence before "KEEPING TRACK OF =
+LEVELS"=20
+should read, "When <TT>Semant</TT> looks at <TT>level.formals</TT>, it =
+will get=20
+these two offsets, suitably converted into <TT>Access</TT> values."=20
+<P><STRONG>Page 150.</STRONG> The book recommends making a file called=20
+<TT>Sparc/Frame.java</TT> or <TT>Mips/Frame.java</TT>, etc. This =
+confuses JDK=20
+1.1 (though not JDK 1.0 or other Java compilers); a simple solution is =
+to create=20
+<TT>Sparc/SparcFrame.java</TT> or <TT>Mips/MipsFrame.java</TT> etc.=20
+<P><STRONG>Page 158.</STRONG> Middle of the page, the 7th line in the =
+entry for=20
+JUMP should refer to <TT>LabelList</TT> instead of <TT>ExpList</TT>.=20
+<P><STRONG>Page 191.</STRONG> Algorithm 8.4, delete the comment "(All =
+the=20
+successors of b are marked)" which is false (the algorithm is still =
+correct).=20
+<P><STRONG>Page 203.</STRONG> Figure 9.4, the third tree for STORE uses=20
+<STRONG>a</STRONG> where it should use <STRONG>d</STRONG>. <!-- Page =
+207, 4th line from bottom, "then then" should be "then" -->
+<P><STRONG>Page 207.</STRONG> The program shown under <STRONG>2. Classes =
+of=20
+registers</STRONG> implements=20
+<I>t</I><SUB>3</SUB>&lt;-<I>t</I><SUB>1</SUB>*<I>t</I><SUB>2</SUB>, not=20
+<I>t</I><SUB>1</SUB>&lt;-<I>t</I><SUB>2</SUB>*<I>t</I><SUB>3</SUB> as =
+claimed.=20
+<P><STRONG>Page 211.</STRONG> The third line of the second code fragment =
+should=20
+read, <PRE>             new TempList(frame.FP(),null));
+</PRE>
+<P><STRONG>Page 230.</STRONG> 7th line after figure, "prove that =
+b*b&gt;0"=20
+should be "prove that b*b&gt;=3D0".=20
+<P><STRONG>Page 262.</STRONG> Algorithm 11.11, line 8, should =
+be:<BR>unspill:=20
+<I>reg</I>[<I>t</I><SUB><SMALL>right</SMALL></SUB>]:=3D`<I>r</I><SUB><SMA=
+LL>(<I>n</I>+1)</SMALL></SUB>';=20
+emit instruction to fetch =
+<I>reg</I>[<I>t</I><SUB><SMALL>right</SMALL></SUB>] <!-- <p><strong>Page =
+293.</strong> =0A=
+"Baker: Whever the mutator fetches a pointer <i>b</i> to a grey or white =
+object"=0A=
+should be "Baker: Whever the mutator fetches a pointer <i>b</i> to a =
+white object"=0A=
+-->
+<P><STRONG>Page 334.</STRONG> Algorithm 15.10, box on the right: the =
+formal=20
+parameters of <I>f <STRONG>'</STRONG></I> should be=20
+(<I>a</I><SUB>1</SUB>,...,<I>a</I><SUB>i-1</SUB>,<I>a</I><SUB>i+1</SUB>,.=
+..<I>a</I><SUB>n</SUB>).=20
+
+<P><STRONG>Page 344.</STRONG> Lines 13 and 14, the two assignments to=20
+<TT>th.memo</TT> and <TT>th.func</TT> should be to <TT>mythunk.memo</TT> =
+and=20
+<TT>mythunk.func</TT>.=20
+<P><STRONG>Page 347.</STRONG> "It is wasteful to build all three lists" =
+should=20
+be "It is wasteful to build these lists."=20
+<P><STRONG>Page 349.</STRONG> Line 2 of the main text, "(string of =
+integer)"=20
+should be "(string or integer)".=20
+<P><STRONG>Page 351.</STRONG> First paragraph should read, "If =
+(f,(1,1,0)) is in=20
+the set H, then we know that f is non strict in its third argument. If=20
+(f,(1,1,0)) is never put into H, then f must be strict in its third =
+argument."=20
+<P><STRONG>Page 369.</STRONG> In the clause labeled "<I>Occurrence of a=20
+variable</I>", replace the word <I>generalize</I> with =
+<I>instantiate</I>.=20
+<P><STRONG>Page 370.</STRONG> Last line of the page should read, =
+"<I>Variable=20
+declaration with implicit type</I> clause of Algorithm 16.10."=20
+<P><STRONG>Page 395.</STRONG> In the table, in the column headed=20
+<I>gen</I>[<I>s</I>], delete each of the three instances of=20
+"-<I>kill</I>[<I>s</I>]".=20
+<P><STRONG>Page 416.</STRONG> Figure 18.2b is misleading because the =
+graph shown=20
+has two "start" nodes. It is intended as a subgraph of some larger graph =
+with a=20
+single entry node.=20
+<P><STRONG>Page 417.</STRONG> Third line from bottom, the two equations=20
+<STRONG>D[s0]=3D...</STRONG> and <STRONG>D[n]=3D...</STRONG> have been =
+inadvertantly=20
+jammed together, and should be on separate lines.=20
+<P><STRONG>Page 420.</STRONG> Lines 7-9, definition of <STRONG>Nested=20
+loops</STRONG> should be: If <I>A</I> and <I>B</I> are loops with =
+headers=20
+<I>a</I> and <I>b</I> respectively, such that <I>a</I> not-equal =
+<I>b</I> and=20
+<I>b</I> is in <I>A</I>, then the nodes of <I>B</I> are a proper subset =
+of the=20
+nodes of <I>A</I>.=20
+<P><STRONG>Page 420.</STRONG> Line 18 should=20
+be,<BR><I>h</I><SUB><SMALL>2</SMALL></SUB> if=20
+<I>h</I><SUB><SMALL>2</SMALL></SUB> is in=20
+<I>loop</I>[<I>h</I><SUB><SMALL>1</SMALL></SUB>].=20
+<P><STRONG>Page 422.</STRONG> In the paragraph headed by=20
+<STRONG>HOISTING</STRONG>, 5th line, replace "<I>a</I>&lt;<I>b</I>" by=20
+"<I>i</I>&gt;=3D<I>N</I> initially."=20
+<P><STRONG>Page 422.</STRONG> Seventh line from bottom, =
+"<STRONG>1.</STRONG>=20
+<I>d</I> dominates all loop exits, <I>or t</I> is not <I>live-out</I> of =
+any=20
+loop exit node" is correct, but a better criterion =
+is,<BR>"<STRONG>1.</STRONG>=20
+<I>d</I> dominates all loop exits at which <I>t</I> is <I>live-out</I>;" =
+
+<P><STRONG>Page 426.</STRONG> Line 13-14 should be,<BR>Assuming <I>j</I> =
+is=20
+characterized by (<I>i,a,b</I>), then <I>k</I> is described by=20
+(<I>i,a.c,b.c</I>) or (<I>i,a+d,b</I>), depending on whether <I>k</I>'s=20
+definition was <I>j.c</I> or <I>j+d</I>.=20
+<P><STRONG>Page 428.</STRONG> Line 14, "invariant values" should be =
+"invariant=20
+values and in definitions of itself," <BR>Line 19, "so therefore the =
+comparison=20
+<I>j</I>&lt;<I>n</I> can be written as" should be "so therefore the =
+comparison=20
+<I>k</I>&lt;<I>n</I> can be written as".=20
+<P><STRONG>Page 430.</STRONG> Lines 13 and 14, labels=20
+<I>L</I><SUB><SMALL>1</SMALL></SUB> and =
+<I>L</I><SUB><SMALL>2</SMALL></SUB>=20
+should be swapped:<BR>if <I>u&gt;j</I> goto =
+<I>L</I><SUB><SMALL>1</SMALL></SUB>=20
+else goto <I>L</I><SUB><SMALL>2</SMALL></SUB><BR>if <I>u&lt;=3Dj</I> =
+goto=20
+<I>L</I><SUB><SMALL>2</SMALL></SUB> else goto=20
+<I>L</I><SUB><SMALL>1</SMALL></SUB>=20
+<P><STRONG>Page 431.</STRONG> Line 3 should have <IMG alt=3DDelta=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/Delta.gif"> in =
+front of=20
+<I>k</I><SUB><SMALL>1</SMALL></SUB> and=20
+<I>k<SUB><SMALL>m</SMALL></SUB></I>:<BR><I>k</I>&gt;=3D0 <IMG alt=3Dand=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/wedge.gif"> <IMG =
+alt=3DDelta=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/Delta.gif"><I>k</I>=
+<SUB><SMALL>1</SMALL></SUB>&gt;=3D0=20
+<IMG alt=3Dand =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/wedge.gif"> . .=20
+. <IMG alt=3Dand =
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/wedge.gif">=20
+<IMG alt=3DDelta=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/Delta.gif"><I>k<SUB=
+><SMALL>m</SMALL></SUB></I>&gt;=3D0=20
+
+<P><STRONG>Page 432.</STRONG> Lines 24 and 25, labels=20
+<I>L</I><SUB><SMALL>1</SMALL></SUB> and =
+<I>L</I><SUB><SMALL>2</SMALL></SUB>=20
+should be swapped:<BR>if <I>u'&gt;=3Dj</I> goto=20
+<I>L</I><SUB><SMALL>1</SMALL></SUB> else goto=20
+<I>L</I><SUB><SMALL>2</SMALL></SUB><BR>if <I>u'&lt;j</I> goto=20
+<I>L</I><SUB><SMALL>2</SMALL></SUB> else goto=20
+<I>L</I><SUB><SMALL>1</SMALL></SUB>=20
+<P><STRONG>Page 441.</STRONG> Figure 19.4 (b,f,g), block 6 should =
+increment=20
+<I>k</I> by 2, not by 1.=20
+<P><STRONG>Page 442.</STRONG> Lines 10-11 should read,<BR>1. If <I>x</I> =
+is the=20
+<I>i</I>th argument of a phi function in block <I>n</I>, then the =
+definition of=20
+<I>x</I> dominates the <I>i</I>th predecessor of <I>n</I>.=20
+<P><STRONG>Page 445.</STRONG> Algorithm 19.6, lines 10 and 14, all =
+references to=20
+<I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>n</I>] should refer to=20
+<I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>Y</I>].<BR>Algorithm 19.6, line =
+15=20
+should read "<STRONG>if</STRONG> <I>a</I> not in=20
+<I>A</I><SUB><SMALL>orig</SMALL></SUB>[<I>Y</I>]".<BR>First full =
+paragraph on=20
+page 445 should read,=20
+<BLOCKQUOTE>Algorithm 19.6 starts with a set <I>V</I> of variables, a =
+graph=20
+  <I>G</I> of control-flow nodes -- each node is a basic block of =
+statements --=20
+  and for each node <I>n</I> a set=20
+  <I>A</I><SUB><SMALL>orig</SMALL></SUB>[<I>n</I>] of variables defined =
+in node=20
+  <I>n</I>. The algorithm computes=20
+  <I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>a</I>], the set of nodes that =
+must=20
+  have phi-functions for variable <I>a</I>. Note that sometimes a node =
+may=20
+  contain an ordinary definition <I>and</I> a phi-function for the same=20
+  variable; for example, in Figure 19.3b, <I>a</I> is in=20
+  <I>A</I><SUB><SMALL>orig</SMALL></SUB>[2] and node 2 is in=20
+  <I>A</I><SUB><SMALL>phi</SMALL></SUB>[<I>a</I>]. </BLOCKQUOTE>
+<P><STRONG>Page 448.</STRONG> Last paragraph should read,=20
+<BLOCKQUOTE>Suppose there is a CFG path from <I>a</I> to <I>b</I> but =
+<I>a</I>=20
+  is not an ancestor of <I>b</I>. This means that some edge on the path =
+is not a=20
+  spanning-tree edge, so <I>b</I> must have been reached in the =
+depth-first=20
+  search before <I>a</I> was (otherwise, after visiting <I>a</I> the =
+search=20
+  would continue along tree-edges to <I>b</I>). Thus, =
+<I>dfnum</I>(<I>a</I>)=20
+  &gt; <I>dfnum</I>(<I>b</I>). </BLOCKQUOTE>
+<P><STRONG>Page 460.</STRONG> Figure 19.13 (a), block 6 should increment =
+
+<I>k</I><SUB>2</SUB> by 2, not by 1.=20
+<P><STRONG>Page 470.</STRONG> Figure 19.19, block 6 (on left), and =
+<TT>else</TT>=20
+clause of if-statement (on right) should increment <I>k</I><SUB>2</SUB> =
+by 2,=20
+not by 1. <BR>Figure 19.19, right-hand side, line 8 should refer to=20
+<I>j</I><SUB>2</SUB>, not <I>j</I><SUB>1</SUB>.=20
+<P><STRONG>Page 480.</STRONG> Line 4, "hypothetical machine" should be =
+"MIPS=20
+R4000".=20
+<P><STRONG>Page 481.</STRONG> Figure 20.2, lines 5-6 of the caption =
+should read,=20
+
+<BLOCKQUOTE>nor four cycles later (because of <STRONG>Add</STRONG> and=20
+  <STRONG>Round</STRONG> hazards). But if there were two adders and two =
+rounding=20
+  units, then an ADD <I>could</I> be started four </BLOCKQUOTE>
+<P><STRONG>Page 492.</STRONG> Figure 20.10, steps 2-4 should be as =
+shown:=20
+<BR><IMG alt=3D"Figure 20.10, corrected"=20
+src=3D"http://www.cs.princeton.edu/~appel/modern/text/fig20-10.gif">=20
+<P><STRONG>Page 497.</STRONG> The first full sentence should read,=20
+<BLOCKQUOTE>A mispredict rate of 10% can result in very many stalled=20
+  instructions -- if each mispredict stalls 11 instruction slots, as =
+described=20
+  in the example on page 494, and there is one mispredict every 10 =
+branches, and=20
+  one-sixth of all instructions are branches, then 18% of the =
+processor's time=20
+  is spent waiting for mispredicted instruction fetches. </BLOCKQUOTE>
+<P><STRONG>Page 499.</STRONG> Exercise 20.2g, "Run Algorithm itermod" =
+should be=20
+"Run Algorithm 20.9".=20
+<P><STRONG>Page 529.</STRONG> 4th line from bottom, change both =
+occurrences of=20
+"<TT>integer</TT>" to "<TT>int</TT>". <!-- Page 523, line 6, "array of =
+id" should be "array of type-id" --></P></BODY></HTML>
+
+------=_NextPart_000_0007_01CBF703.B61A71A0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/evlr1dfa.gif
+
+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
+boW06e62EeyOxAgAADs=
+
+------=_NextPart_000_0007_01CBF703.B61A71A0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/Delta.gif
+
+R0lGODdhCQALAPcAAAAAAAEBAQICAgMDAwQEBAUFBQYGBgcHBwgICAkJCQoKCgsLCwwMDA0NDQ4O
+Dg8PDxAQEBERERISEhMTExQUFBUVFRYWFhcXFxgYGBkZGRoaGhsbGxwcHB0dHR4eHh8fHyAgICEh
+ISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoqKisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0
+NDU1NTY2Njc3Nzg4ODk5OTo6Ojs7Ozw8PD09PT4+Pj8/P0BAQEFBQUJCQkNDQ0REREVFRUZGRkdH
+R0hISElJSUpKSktLS0xMTE1NTU5OTk9PT1BQUFFRUVJSUlNTU1RUVFVVVVZWVldXV1hYWFlZWVpa
+WltbW1xcXF1dXV5eXl9fX2BgYGFhYWJiYmNjY2RkZGVlZWZmZmdnZ2hoaGlpaWpqamtra2xsbG1t
+bW5ubm9vb3BwcHFxcXJycnNzc3R0dHV1dXZ2dnd3d3h4eHl5eXp6ent7e3x8fH19fX5+fn9/f4CA
+gIGBgYKCgoODg4SEhIWFhYaGhoeHh4iIiImJiYqKiouLi4yMjI2NjY6Ojo+Pj5CQkJGRkZKSkpOT
+k5SUlJWVlZaWlpeXl5iYmJmZmZqampubm5ycnJ2dnZ6enp+fn6CgoKGhoaKioqOjo6SkpKWlpaam
+pqenp6ioqKmpqaqqqqurq6ysrK2tra6urq+vr7CwsLGxsbKysrOzs7S0tLW1tba2tre3t7i4uLm5
+ubq6uru7u7y8vL29vb6+vr+/v8DAwMHBwcLCwsPDw8TExMXFxcbGxsfHx8jIyMnJycrKysvLy8zM
+zM3Nzc7Ozs/Pz9DQ0NHR0dLS0tPT09TU1NXV1dbW1tfX19jY2NnZ2dra2tvb29zc3N3d3d7e3t/f
+3+Dg4OHh4eLi4uPj4+Tk5OXl5ebm5ufn5+jo6Onp6erq6uvr6+zs7O3t7e7u7u/v7/Dw8PHx8fLy
+8vPz8/T09PX19fb29vf39/j4+Pn5+fr6+vv7+/z8/P39/f7+/v///ywAAAAACQALAAAIQwD/Cfy3
+a6DBbgDcGRRoBkCmhe7MEImw8E43VQAKCowoMEKVgRYFIkrIcKA7AIj+ZdIosApFEXdixiSScZfN
+mza7BQQAOw==
+
+------=_NextPart_000_0007_01CBF703.B61A71A0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/wedge.gif
+
+R0lGODlhCAALAPcAAP//////zP//mf//Zv//M///AP/M///MzP/Mmf/MZv/MM//MAP+Z//+ZzP+Z
+mf+ZZv+ZM/+ZAP9m//9mzP9mmf9mZv9mM/9mAP8z//8zzP8zmf8zZv8zM/8zAP8A//8AzP8Amf8A
+Zv8AM/8AAMz//8z/zMz/mcz/Zsz/M8z/AMzM/8zMzMzMmczMZszMM8zMAMyZ/8yZzMyZmcyZZsyZ
+M8yZAMxm/8xmzMxmmcxmZsxmM8xmAMwz/8wzzMwzmcwzZswzM8wzAMwA/8wAzMwAmcwAZswAM8wA
+AJn//5n/zJn/mZn/Zpn/M5n/AJnM/5nMzJnMmZnMZpnMM5nMAJmZ/5mZzJmZmZmZZpmZM5mZAJlm
+/5lmzJlmmZlmZplmM5lmAJkz/5kzzJkzmZkzZpkzM5kzAJkA/5kAzJkAmZkAZpkAM5kAAGb//2b/
+zGb/mWb/Zmb/M2b/AGbM/2bMzGbMmWbMZmbMM2bMAGaZ/2aZzGaZmWaZZmaZM2aZAGZm/2ZmzGZm
+mWZmZmZmM2ZmAGYz/2YzzGYzmWYzZmYzM2YzAGYA/2YAzGYAmWYAZmYAM2YAADP//zP/zDP/mTP/
+ZjP/MzP/ADPM/zPMzDPMmTPMZjPMMzPMADOZ/zOZzDOZmTOZZjOZMzOZADNm/zNmzDNmmTNmZjNm
+MzNmADMz/zMzzDMzmTMzZjMzMzMzADMA/zMAzDMAmTMAZjMAMzMAAAD//wD/zAD/mQD/ZgD/MwD/
+AADM/wDMzADMmQDMZgDMMwDMAACZ/wCZzACZmQCZZgCZMwCZAABm/wBmzABmmQBmZgBmMwBmAAAz
+/wAzzAAzmQAzZgAzMwAzAAAA/wAAzAAAmQAAZgAAM+4AAN0AALsAAKoAAIgAAHcAAFUAAEQAACIA
+ABEAAADuAADdAAC7AACqAACIAAB3AABVAABEAAAiAAARAAAA7gAA3QAAuwAAqgAAiAAAdwAAVQAA
+RAAAIgAAEe7u7t3d3bu7u6qqqoiIiHd3d1VVVURERCIiIhEREQAAACH5BAEAAAAALAAAAAAIAAsA
+BwghAAEIHEiwoMGD/wz+S1gwIUOBDB8CeBiRYEWLEgUC/BcQADs=
+
+------=_NextPart_000_0007_01CBF703.B61A71A0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.cs.princeton.edu/~appel/modern/text/fig20-10.gif
+
+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
+RSlOkYpVtOIVsZjFuxUAADs=
+
+------=_NextPart_000_0007_01CBF703.B61A71A0--
